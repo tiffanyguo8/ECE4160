@@ -35,10 +35,9 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-8 text-center">
-                        <h2 class="text-white-75 mb-4"> Lab 1: The Artemis Board</h2>
+                        <h2> Lab 1: The Artemis Board</h2>
                         <hr class="divider divider-light" />
-                        <p class="text-white-75 mb-4"> 
-                            The goal of our first lab was to set up and become familiar with the Arduino IDE and the Artemis board. 
+                        <p> The goal of our first lab was to set up and become familiar with the Arduino IDE and the Artemis board. 
                             
                             Through running some example programs on the board, we practiced programming the board, using the board LED, reading/writing 
                             serial messages over USB, and using the onboard temperature sensor and Pulse Density Microphone. </p>
@@ -52,7 +51,6 @@
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
                               <div class="accordion-body">
-                                <strong>
                                   In this first example, the onboard LED is programmed to blink on and off at a regular interval. 
                                   <iframe width="560" height="315" src="https://www.youtube.com/embed/wSYRoG2q3cA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                   
@@ -67,9 +65,7 @@
                             </h2>
                             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
                               <div class="accordion-body">
-                                <strong>
-                                  Next, we test the UART serial communication of the board. The board first sends a message to my laptop, and then I type "quack!" into the serial monitor. The board echos my input, validating its ability to read and write to the serial port. 
-                                    
+                                  Next, I test the UART serial communication of the board. The board first sends a message to my laptop, and then I type "quack!" into the serial monitor. The board echos my input, validating its ability to read and write to the serial port. 
                                   <iframe width="560" height="315" src="https://www.youtube.com/embed/Nwy5d7P4tRM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                     
                               </div>
@@ -83,9 +79,12 @@
                             </h2>
                             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample" style="">
                               <div class="accordion-body">
-                                <strong> bye
+                                I then test the temperature sensor on the board by exposing it to cold and warm temperatures. 
+                                    The room temperature reading is close to 32300. When I put the board in the freezer, the temperature reading decreases 
+                                    gradually to 31400. Then, when my classmate Zin places her hand on the board to warm it, the temperature reading increases to 33000. 
                                     <iframe width="560" height="315" src="https://www.youtube.com/embed/n1ns9mHQWaA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                              </div>
+                              
+                                </div>
                             </div>
                           </div>
                           <div class="accordion-item">
@@ -96,7 +95,8 @@
                             </h2>
                             <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample" style="">
                               <div class="accordion-body">
-                                <strong> hi
+                                Lastly, I use the board's microphone and FFT function to detect the maximum amplitude frequency input. When the board picks up the 666Hz frequency
+                                  I am generating, it calculates the frequency of the input waveform using Fourier transform and outputs a reading of 675Hz. 
                                     <iframe width="560" height="315" src="https://www.youtube.com/embed/DL0owMEGQNY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                               </div>
                             </div>
