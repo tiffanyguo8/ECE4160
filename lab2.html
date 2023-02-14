@@ -107,8 +107,8 @@
                               <h5 class="mb-1">Get Time Command</h5>
                             </div>
                             <p class="mb-1">GET_TIME_MILLIS: This command prompts the Artemis to write the time in milliseconds since startup to the
-                              string characteristic, where my laptop can read the time value. Time is expressed in the format T:123456, where 123456
-                              represents the result of the millis() function in Arduino. </p>
+                              string characteristic, where my laptop can read the time value. Time is expressed in the format T:666666, where 666666
+                              represents the result of the millis() function call in Arduino. </p>
                           </a>
                         </div>
                         <br>
@@ -120,8 +120,10 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Notification Handler</h5>
                             </div>
-                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small class="text-muted">Donec id elit non mi porta.</small>
+                            <p class="mb-1">I wrote a notification handler called str_notify_handler() which handles new messages that the Artemis board
+                              writes to the BLEStringCharactersitic. When my laptop is notified of a new message, it will process the message as a time
+                              value and update the global time variable with the new updated time. This is more convenient and efficientcompared to pollling 
+                              for new messages using ble.receive_string(ble.uuid['RX_STRING']). </p>
                           </a>
                         </div>
                         <br>
