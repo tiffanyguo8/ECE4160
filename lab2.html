@@ -93,8 +93,8 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Send Echo Command</h5>
                             </div>
-                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small class="text-muted">Donec id elit non mi porta.</small>
+                            <p class="mb-1">ECHO: When this command is sent to the Artemis, it echos the message I sent back through Bluetooth. 
+                              For example, when I send "QUACK!" over Bluetooth, the robot says "QUACK!" back to me. </p>
                           </a>
                         </div>
                         <br>
@@ -106,8 +106,9 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Get Time Command</h5>
                             </div>
-                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Donec id elit non mi porta.</small>
+                            <p class="mb-1">GET_TIME_MILLIS: This command prompts the Artemis to write the time in milliseconds since startup to the
+                              string characteristic, where my laptop can read the time value. Time is expressed in the format T:123456, where 123456
+                              represents the result of the millis() function in Arduino. </p>
                           </a>
                         </div>
                         <br>
