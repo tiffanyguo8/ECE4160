@@ -67,26 +67,28 @@
                                 <img src="assets/img/Circuit_diagram.jpg" alt="Wiring Diagram" width=70% height=auto/>
                               
                             <p class="card-text">
-                                First, I characterized the sensors by graphing sensor readings at known distances. I found that the readings were 
-                                good up to 30cm. Unfortunately, that was the length of my ruler, so I stopped measuring, but I would keep measuring
-                                to see how long the maximum range of the sensor is while maintaining data accuracy. The standard deviation of the data
-                                is negligible, showing that the results are very repeatable. </p>
+                                ToF sensors and QWIIC breakout board connections: </p>
                               
-                              <img src="assets/img/Distance_characterization.png" alt="TOF characterization" width=70% height=auto/>
+                              <img src="assets/img/TOF_connection.jpg" alt="TOF connections" width=70% height=auto/>
                           </div>
                         </div>
                         <br>
                         <div class="card mb-3">
                           <h3 class="card-header">Lab</h3>
                           <div class="card-body">
-                            <h5 class="card-title">ToF sensors and QWIIC breakout board connections:t</h5>
-                            <img src="assets/img/TOF_connection.jpg" alt="TOF connections" width=70% height=auto/>
+                            <h5 class="card-title">ToF sensor characterization:</h5>
+                            <img src="assets/img/Distance_characterization.png" alt="TOF characterization" width=70% height=auto/>
                           </div>
                           
                           <div class="card-body">
                             <p class="card-text">I chose to set the ToF sensors to short mode, since the range of short mode (up to 1.3m) is enough
                               for the purposes of our robot to scan its surroundings. Sacrificing the extra range allows the sensors to be more
-                              accurate regardless of the ambient lighting. </p>
+                              accurate regardless of the ambient lighting. 
+                              First, I characterized the sensors by graphing sensor readings at known distances. I found that the sensor readings
+                              were quite accurate for distances within the specified range. The standard deviation of the data
+                              is negligible, showing that the results are very repeatable. I also calculated the begin-to-end time of ranging
+                              is around 50ms.
+                              </p>
                           </div>
                           <ul class="list-group list-group-flush">
                             <li class="list-group-item">2 ToF sensors working in parallel:
