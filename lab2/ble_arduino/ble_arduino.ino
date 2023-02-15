@@ -31,6 +31,9 @@ float tx_float_value = 0.0;
 long interval = 500;
 static long previousMillis = 0;
 unsigned long currentMillis = 0;
+
+int count = 0;
+static long begin_time = 0;
 //////////// Global Variables ////////////
 
 enum CommandTypes
@@ -43,6 +46,7 @@ enum CommandTypes
     SET_VEL,
     GET_TIME_MILLIS,
     GET_TEMP_5s,
+    GET_TEMP_5s_RAPID,
 };
 
 void
@@ -171,38 +175,45 @@ handle_command()
             tx_characteristic_string.writeValue(tx_estring_value.c_str());
             break;
             
-        case GET_TEMP_5s:
-            //char msg[200];
-            // String msg = "";
-            // for(int i = 0; i < 5; i++)
-            // {
-            // msg += "T:";
-            // msg += millis();
-            // msg += "|C:";
-            // msg += getTempDegF();
-            // if(i <4)
-            //   msg += "|";
-            // sprintf(msg, "T:");
-            // sprintf(msg, utoa(millis()));
-            // sprintf(msg, "|C:");
-            // sprintf(msg, utoa(getTempDegF()));
-            // delay(1000);
-            // }
-            
-            // Serial.print("Sending: ");
-            // Serial.println(msg);
+        case GET_TEMP_5s:            
+            Serial.print("Sending timestamped temperature data. ");
+
             tx_estring_value.clear();
             for (int i = 0; i < 5; i++)
             {
                 tx_estring_value.append("T:");
                 tx_estring_value.append((int)millis());
                 tx_estring_value.append("|C:");
-                tx_estring_value.append(getTempDegF());
+                tx_estring_value.append(getTempDegC());
                 if (i < 4)
                     tx_estring_value.append("|");
                 delay(1000);
             }
             tx_characteristic_string.writeValue(tx_estring_value.c_str());
+            break;
+        
+        case GET_TEMP_5s_RAPID:
+            Serial.println("Collecting temperature data... ");
+
+            tx_estring_value.clear();
+            begin_time = millis();
+            while (millis() < begin_time + 5000)
+            {
+                tx_estring_value.append("T:");
+                tx_estring_value.append((int)millis());
+                tx_estring_value.append("|C:");
+                tx_estring_value.append(getTempDegC());
+                tx_estring_value.append("|");
+                count+=1;
+                if(count == 5)
+                {
+                  tx_characteristic_string.writeValue(tx_estring_value.c_str());
+                  tx_estring_value.clear();
+                  count = 0;
+                }
+            }
+            tx_characteristic_string.writeValue(tx_estring_value.c_str());
+            Serial.println("Data transmission complete.");
             break;
             
         default:
