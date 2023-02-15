@@ -136,7 +136,8 @@
                               <h5 class="mb-1">Get Temperature Command</h5>
                             </div>
                             <p class="mb-1">Building off of the previous notification handler, I added functionality to handle time and temperature
-                              values. </p>
+                              values. In the first video, a temperature value is transmitted every 1 second for an interval of 5 seconds. In the second
+                              video, temperature values are continuously sent at a rapid page for 5 seconds. </p>
                           </a>
                         </div>
                         <br>
@@ -150,8 +151,12 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Limitations</h5>
                             </div>
-                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small class="text-muted">Donec id elit non mi porta.</small>
+                            <p class="mb-1">When I was trying to send the 5 seconds of rapid temperature data at first, I kept running into an error.
+                              It turns out that the storage constraints of the Artemis board are an important aspect to consider when sending data. 
+                              The Artemis board has 384 kB of RAM. Assuming that all of this RAM is being used towards data transmittion, that gives us
+                              384,000 bytes of memory. If we also assume that we are transmitting 16-bit or 2-byte values at a frequency of 150 Hz, this
+                              means that every second we are sending 300 bytes/second, and in 5 seconds we use 5*300=1500 bytes. Dividing our total 
+                              384 kB by 1500 b, we get 256; thus, we can transmit 256 5-second intervals of data with our current memory limitations.</p>
                           </a>
                         </div>
                         
