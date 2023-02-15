@@ -48,18 +48,23 @@
                               <img src="assets/img/TOF_address.png" alt="TOF sensor address" width=70% height=auto/>
                               <br><br>
                             <p class="card-text">
-                                Since the address of both sensors are originally 0x29, I change the address of one sensor during setup so that
+                                The actuall I2C sensor address is 0x52, but it was bit shifted since the least significant bit is used to indicate
+                                the read/write status. 0x29 is 0x52 shifted to the right, so that is the displayed address. 
+                                Since the address of both sensors are the same, I must change the address of one sensor during setup so that
                                 the Artemis can differentiate between the two. Another possible method is to alternate shutting down one sensor
                                 at a time whenever you need to take a reading from the other sensor, but this is risky since the sensors may take
-                                more time to start up every time. I decided to solder the SHUTX pin of one sensor to pin 8 of my Artemis board,
+                                more time to start up every time. I decided to solder the XSHUT pin of one sensor to pin 8 of my Artemis board,
                                 which I then used to shut off the corresponding sensor during setup and change the address of the other sensor. I
                                 then turned the first sensor back on, leaving two sensors able to work simultaneously with different addresses. </p> 
-                                <br>
                               
                             <p class="card-text">
                                 Since we are given 2 time of flight sensors, one will be placed on the front of the robot
                                 while the other will be on the side. This configuration allows the robot to gather distance information in the 
-                                x and y axes, which will help in mapping out the obstacles in an area. </p>
+                                x and y axes, which will help in mapping out the obstacles in an area. One limitation of this sessor configuration
+                                is that only one side at a time will be able to sense objects, but this can be worked around by turning the robot
+                                around to sense the other side. Here is the wiring diagram of the ToF sensors and the Artemis board:</p>
+                              
+                                <img src="assets/img/Circuit_diagram.jpg" alt="Wiring Diagram" width=70% height=auto/>
                               
                             <p class="card-text">
                                 First, I characterized the sensors by graphing sensor readings at known distances. I found that the readings were 
