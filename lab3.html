@@ -37,8 +37,8 @@
                     <div class="col-lg-8 text-center">
                         <h2> Lab 3: Time of Flight Sensors</h2>
                         <hr class="divider divider-light" />
-                        <p> In our third lab, we solder the time of flight sensors to the Artemis board and create a software framework
-                          for collection of distance data. </p>
+                        <p> In our third lab, we solder the time of flight sensors to the Artemis board, characterize the sensors, 
+                        implement parallel data reading, and integrate the sensor code with the Bluetooth from lab 2. </p>
                         
                         <div class="card">
                           <div class="card-body">
@@ -49,7 +49,8 @@
                               <br><br>
                             <p class="card-text">
                                 The actuall I2C sensor address is 0x52, but it was bit shifted since the least significant bit is used to indicate
-                                the read/write status. 0x29 is 0x52 shifted to the right, so that is the displayed address. 
+                                the read/write status. 0x29 is 0x52 shifted to the right, so that is the displayed address. </p>
+                            <p class="card-text">
                                 Since the address of both sensors are the same, I must change the address of one sensor during setup so that
                                 the Artemis can differentiate between the two. Another possible method is to alternate shutting down one sensor
                                 at a time whenever you need to take a reading from the other sensor, but this is risky since the sensors may take
@@ -65,9 +66,9 @@
                                 around to sense the other side. Here is the wiring diagram of the ToF sensors and the Artemis board:</p>
                               
                                 <img src="assets/img/Circuit_diagram.jpg" alt="Wiring Diagram" width=70% height=auto/>
-                              
+                              <br>
                             <p class="card-text">
-                                ToF sensors and QWIIC breakout board connections: </p>
+                                Here is an image of the ToF sensors and QWIIC breakout board connections: </p>
                               
                               <img src="assets/img/TOF_connection.jpg" alt="TOF connections" width=70% height=auto/>
                           </div>
@@ -84,24 +85,24 @@
                             <p class="card-text">I chose to set the ToF sensors to short mode, since the range of short mode (up to 1.3m) is enough
                               for the purposes of our robot to scan its surroundings. Sacrificing the extra range allows the sensors to be more
                               accurate regardless of the ambient lighting. 
-                              First, I characterized the sensors by graphing sensor readings at known distances. I found that the sensor readings
+                              I then characterized the sensors by graphing sensor readings at known distances. I found that the sensor readings
                               were quite accurate for distances within the specified range. The standard deviation of the data
-                              is negligible, showing that the results are very repeatable. I also calculated the begin-to-end time of ranging
-                              is around 50ms.
+                              is negligible, showing that the results are very repeatable. I also calculated that ranging takes around
+                              50ms from start to finish.
                               </p>
                           </div>
                           <ul class="list-group list-group-flush">
                             <li class="list-group-item">2 ToF sensors working in parallel:
                               <iframe width="560" height="315" src="https://www.youtube.com/embed/ZLLR_Xxd574" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                                <p class="card-text">Since I changed the address of one of the sensors during setup, there was no problem
-                              reading from two sensors in parallel.</p></li>
+                                <p class="card-text">Since I changed the address of one of the sensors during setup, I simply added code for a second 
+                                    distance sensor in order to read from two sensors in parallel.</p></li>
                             
                             <li class="list-group-item">ToF sensor speed:
                               <iframe width="560" height="315" src="https://www.youtube.com/embed/Ee4Iy_cQ3P0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                 <p class="card-text">I got around 290ms between readings using this code:</p>
                                 <img src="assets/img/TOF_code.png" alt="TOF speed code" width=70% height=auto/>
                                 <p class="card-text">The limiting factor for the sensor speed is the ranging time. This value can be manipulated
-                              by the user, but the tradeoff for a lower ranging time is the possibility of less accurate distance data. </p></li>
+                              using the setTimingBudgetinMs() function, but the tradeoff for a lower ranging time is the possibility of less accurate distance data. </p></li>
                             
                             <li class="list-group-item">Distance vs Time:
                               <iframe width="560" height="315" src="https://www.youtube.com/embed/ryRVmpvJ-Hs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
