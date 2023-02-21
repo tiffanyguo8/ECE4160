@@ -67,7 +67,20 @@
                          <br>
                             
                         <h2>Set up the IMU</h2>
-                        <p>The AD0_VAL is used to change the default address of the IMU in case multiple IMUs are used. Since we only have 1 IMU, the default value of 1 is used. </p>
+                        <p> For hardware setup, I simply connected the IMU to the Artemis using a QWICC connector and breakout board as shown below: </p>
+                            
+                        <p> I installed the SparkFun 9DOF IMU Breakout - ICM 20948 - Arduino Library and opened the example code Example1_Basics, which displays
+                            the IMU accelerometer, gyroscope, magnetometer, and temperature readings. In the setup section of this code, AD0_VAL is defined by default
+                            as 1. The AD0_VAL is used to change the default address of one IMU in case multiple IMUs are connected using the same I2C bus. 
+                            Since we only have 1 IMU, the default value of 1 is used. 
+                        
+                            When running the example code, I noticed a few things about the accelerometer and gyroscope readings. When I changed the orientation of
+                            the board, the gyroscope readings would increase and then decrease back to zero, since they reflect the angular velocity. The acceleration, 
+                            on the other hand, measures linear acceleration and stays constant after the movement. I also observed that one of the acceleration readings
+                            was always very high while I kept the other two close to zero, which reflects the gravitational pull on whichever axis I orient in that direction.
+                        </p>
+                        
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/wMF-vuHQqTc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         
                         <h2>Accelerometer</h2>
                         <p>body</p>
