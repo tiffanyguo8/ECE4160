@@ -68,7 +68,7 @@
                             
                         <h2>Set up the IMU</h2>
                         <p> For hardware setup, I simply connected the IMU to the Artemis using a QWICC connector and breakout board as shown below: </p>
-                            
+                            <img src="assets/img/TOF_address.png" alt="TOF sensor address" width=70% height=auto/>
                         <p> I installed the SparkFun 9DOF IMU Breakout - ICM 20948 - Arduino Library and opened the example code Example1_Basics, which displays
                             the IMU accelerometer, gyroscope, magnetometer, and temperature readings. In the setup section of this code, AD0_VAL is defined by default
                             as 1. The AD0_VAL is used to change the default address of one IMU in case multiple IMUs are connected using the same I2C bus. 
@@ -81,6 +81,7 @@
                         </p>
                         
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/wMF-vuHQqTc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <p> After testing the code, I added a blinking onboard LED to indicate the IMU was finished setting up which will be used for debugging purposes. 
                         
                         <h2>Accelerometer</h2>
                         <p>body</p>
