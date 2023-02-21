@@ -69,6 +69,7 @@
                         <h2>Set up the IMU</h2>
                         <p> For hardware setup, I simply connected the IMU to the Artemis using a QWICC connector and breakout board as shown below: </p>
                             <img src="assets/img/IMU_hardware.jpg" alt="IMU connection" width=70% height=auto/>
+                        <br><br>
                         <p> I installed the SparkFun 9DOF IMU Breakout - ICM 20948 - Arduino Library and opened the example code Example1_Basics, which displays
                             the IMU accelerometer, gyroscope, magnetometer, and temperature readings. In the setup section of this code, AD0_VAL is defined by default
                             as 1. The AD0_VAL is used to change the default address of one IMU in case multiple IMUs are connected using the same I2C bus. 
@@ -85,11 +86,15 @@
                         
                         <h2>Accelerometer</h2>
                         <p> Using the following equations, I calculated the roll and pitch of the IMU using accelerometer data:
+                            <br>
                             <code> pitch_a = atan2(myICM.accY(),myICM.accZ())*180/M_PI </code>
+                            <br>
                             <code> roll_a  = atan2(myICM.accX(),myICM.accZ())*180/M_PI; </code>
+                            <br>
                             The values were accurate within ±2 degrees, and the outputs at {-90, 0, 90} degrees are shown below:
                         </p>
-                        <img src="assets/img/IMU_hardware.jpg" alt="IMU connection" width=100% height=auto/>
+                        <img src="assets/img/Accelerometer.JPEG" alt="IMU connection" width=100% height=auto/>
+                        <br><br>
                         
                         <h2>Gyroscope</h2>
                         <p>body</p>
