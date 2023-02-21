@@ -86,14 +86,14 @@
                         
                         <h2>Accelerometer</h2>
                         <p> Using the following equations, I calculated the roll and pitch of the IMU using accelerometer data:
-                            <br>
+                            <br><br>
                             <code> pitch_a = atan2(myICM.accY(),myICM.accZ())*180/M_PI </code>
-                            <br>
+                            <br><br>
                             <code> roll_a  = atan2(myICM.accX(),myICM.accZ())*180/M_PI; </code>
-                            <br>
+                            <br><br>
                             The values were accurate within ±2 degrees, and the outputs at {-90, 0, 90} degrees are shown below:
                         </p>
-                        <img src="assets/img/Accelerometer.JPEG" alt="IMU connection" width=100% height=auto/>
+                        <img src="assets/img/Accelerometer.JPEG" alt="Accelerometer Roll and Pitch" width=100% height=auto/>
                         <br><br>
                         
                         <h2>Gyroscope</h2>
