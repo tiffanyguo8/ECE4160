@@ -84,7 +84,12 @@
                         <p> After testing the code, I added a blinking onboard LED to indicate the IMU was finished setting up which will be used for debugging purposes. 
                         
                         <h2>Accelerometer</h2>
-                        <p>body</p>
+                        <p> Using the following equations, I calculated the roll and pitch of the IMU using accelerometer data:
+                            <code> pitch_a = atan2(myICM.accY(),myICM.accZ())*180/M_PI </code>
+                            <code> roll_a  = atan2(myICM.accX(),myICM.accZ())*180/M_PI; </code>
+                            The values were accurate within ±2 degrees, and the outputs at {-90, 0, 90} degrees are shown below:
+                        </p>
+                        <img src="assets/img/IMU_hardware.jpg" alt="IMU connection" width=100% height=auto/>
                         
                         <h2>Gyroscope</h2>
                         <p>body</p>
