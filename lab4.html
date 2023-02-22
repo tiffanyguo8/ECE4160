@@ -116,7 +116,7 @@
                             <br>
                             After applying the LPF, the resulting data was more smooth and the effect of noise was reduced, as shown below:
                         </p>
-                        <img src="assets/img/lpf.png" alt="Low passed accelerometer data" width=700% height=auto/>
+                        <img src="assets/img/lpf.png" alt="Low passed accelerometer data" width=70% height=auto/>
                         <br><br>
                         <h2>Gyroscope</h2>
                         
@@ -132,7 +132,30 @@
                             <br>
                             <code> yaw_g = yaw_g + myICM.gyrZ()*dt; </code>
                             <br><br>
-                        
+                            
+                            I observed that when I rotated the board about either the x, y, or z axis as indicated by the diagram on the board,
+                            the pitch, roll, or yaw value would increment or decrement continuously. In the video below, the first, second, and third
+                            value printed to the serial monitor represent the pitch, roll, and yaw values respectively. You can see that when I only
+                            rotate the board on one of its axes, only one value changes drastically while the other two remain relatively constant:
+                            
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/fYuPevBoGvg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            
+                            The gyroscope data can be used to perform dead reckoning calculations, but a drawback of this method is the accumulation
+                            of error over time. On the other hand, accelerometer measurements do not risk bias due to unbounded error since the force
+                            of gravity is constant; however, the measurements are more susceptible to noice, hence why we built a low pass filter. In order
+                            to combine the benefits of both the accelerometer and gyroscope, I created a complementary filter using the below equations:
+                            <br><br>
+                            <code> pitch = (pitch+myICM.gyrX()*dt)*0.9 + pitch_a*0.1; </code>
+                            <br>
+                            <code> roll = (roll+myICM.gyrY()*dt)*0.9 + roll_a*0.1; </code>
+                            <br><br>
+                        </p>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/yS3aLIMy5yY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            
+                            <p>
+                                As you can see from the video, the combined measurements are very stable(not as much noise as the accelerometer data) 
+                                and relatively accurate (no drifting of values as seen with the gyroscope data). 
+                            
                         <h2>Sample Data</h2>
                         <p>body</p>
                         
