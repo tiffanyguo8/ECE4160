@@ -96,6 +96,27 @@
                         <img src="assets/img/Accelerometer.JPEG" alt="Accelerometer Roll and Pitch" width=100% height=auto/>
                         <br><br>
                         
+                        <p>
+                            To reduce the noise in pitch and roll readings, I took a Fourier transform of the data and implemented a low pass filter.
+                            I used 256 data points with a sampling frequency of 9.7 values / second and referred to a website for
+                            <a href="Fourier Transform in Python">https://www.alphabold.com/fourier-transform-in-python-vibration-analysis/</a>. 
+                            Below is the FFT plot I generated. 
+                        </p>
+                            <img src="assets/img/fourier.png" alt="Fourier transform of accelerometer data" width=70% height=auto/>
+                        <p>
+                            Although it looks like there is a lot of fluctuation, this is actually due to the scale
+                            of the axes; the y-axis range is very small, so the fluctuation in the readings is actually much lower than they appear, 
+                            and there wasn't a clear frequency where a lot of noise was present. I still set up a low pass filter using the equations from
+                            class, 
+                            <code> 
+                                    pitch_a_LPF[n] = alpha*pitch_a + (1-alpha)*pitch_a_LPF[n-1];
+                                        <br>
+                                    pitch_a_LPF[n-1] = pitch_a_LPF[n];
+                            </code>
+                            <br>
+                            After applying the LPF, the resulting data was more smooth and the effect of noise was reduced, as shown below:
+                        </p>
+                        <img src="assets/img/lpf.png" alt="Low passed accelerometer data" width=10700% height=auto/>
                         <h2>Gyroscope</h2>
                         <p>body</p>
                         
