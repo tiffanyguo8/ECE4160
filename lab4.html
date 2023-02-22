@@ -88,7 +88,7 @@
                         <p> Using the following equations, I calculated the roll and pitch of the IMU using accelerometer data:
                             <br><br>
                             <code> pitch_a = atan2(myICM.accY(),myICM.accZ())*180/M_PI </code>
-                            <br><br>
+                            <br>
                             <code> roll_a  = atan2(myICM.accX(),myICM.accZ())*180/M_PI; </code>
                             <br><br>
                             I observed the values to be accurate within ±2 degrees, and the outputs at {-90, 0, 90} degrees are shown below:
@@ -98,7 +98,7 @@
                         
                         <p>
                             To reduce the noise in pitch and roll readings, I took a Fourier transform of the data and implemented a low pass filter.
-                            I used 256 data points with a sampling frequency of 9.7 values / second and referred to a website for
+                            I used 256 data points with a sampling frequency of 9.7 values/second and referred to the website
                             <a href="Fourier Transform in Python">https://www.alphabold.com/fourier-transform-in-python-vibration-analysis/</a>. 
                             Below is the FFT plot I generated. 
                         </p>
@@ -116,9 +116,22 @@
                             <br>
                             After applying the LPF, the resulting data was more smooth and the effect of noise was reduced, as shown below:
                         </p>
-                        <img src="assets/img/lpf.png" alt="Low passed accelerometer data" width=10700% height=auto/>
+                        <img src="assets/img/lpf.png" alt="Low passed accelerometer data" width=700% height=auto/>
+                        <br><br>
                         <h2>Gyroscope</h2>
-                        <p>body</p>
+                        
+                        <p> Using the following equations, I calculated the pitch, roll, and yaw from the gyroscope data:
+                            <br><br>
+                            <code> dt = (micros()-last_time)/1000000.; </code>
+                            <br>
+                            <code> last_time = micros(); </code>
+                            <br>
+                            <code> pitch_g = pitch_g + myICM.gyrX()*dt; </code>
+                            <br>
+                            <code> roll_g = roll_g + myICM.gyrY()*dt; </code>
+                            <br>
+                            <code> yaw_g = yaw_g + myICM.gyrZ()*dt; </code>
+                            <br><br>
                         
                         <h2>Sample Data</h2>
                         <p>body</p>
