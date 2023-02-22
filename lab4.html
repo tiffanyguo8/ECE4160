@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Tiffany's Lab 3</title>
+        <title>Tiffany's Lab 4</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap Icons-->
@@ -170,14 +170,21 @@
                             so separating them allows me to read in IMU data more frequently. 
                         </p>
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/n67UHzydZ7Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        
+                        <br>
+                        I am sending over data from the Artemis to my laptop as soon as I receive a data reading, but an alternative approach would be to store a
+                        large quantity of data on the Artemis and then send the data altogether after sampling. This method would be constrained by the maximum storage of
+                        the Artemis board, which is 384kB of RAM. I would have to store one time stamp and three IMU readings every 1/10th of a second, and one time stamp and
+                        two TOF readings every half a second or so. Time stamps are recorded using the millis() function in Arduino, which returns a value of the long int type,
+                        and IMU readings are floats while TOF readings are integers. According to Arduino, long ints are 4 bytes, ints are 2 bytes, and floats are 4 bytes. Thus,
+                        every second of data would take up 10*(4+3(4)) + 2*(4+2(2)) = 176 bytes. It would take around 2,181 seconds to use up all of the Artemis's RAM this way. 
+                        <br><br>
                         <h2>Cut the Coord</h2>
                         <p> Next, I finally integrate the sensors and Artemis board with the robot! I used a 850mAh battery to power the robot's 
                         motor drivers, and I used the other 650mAh mattery to power the Artemis. The voltage supply of both batteries is 3.7V, 
                         and the reason I chose to use the larger capacity battery for the motors is because they consume power more quickly
                         than the board. Here is a picture of the hardware setup with the battery attached:</p>
                         <img src="assets/img/battery.jpg" alt="Artemis + sensors + battery" width=70% height=auto/>
-                        
+                        <br><br>
                         <h2>Record a Stunt</h2>
                         <p> Lastly, I strapped the whole setup to my robot and took it for a spin. First, I drove the car as-is straight out of the box
                         in order to get a feel for what it can do. I was surprised at how much it lived up to the title of a "fast robot," but, as 
@@ -195,6 +202,8 @@
                             Here is the TOF and IMU data from my test run:
                         </p>
                         <br><br>
+                        <img src="assets/img/tof_on_robot.png" alt="Time of Flight sensors on the robot" width=70% height=auto/>
+                        <img src="assets/img/imu_on_robot.png" alt="IMU sensor on the robot" width=70% height=auto/>
                         
                         <br>
                         <div class="d-grid gap-2">
