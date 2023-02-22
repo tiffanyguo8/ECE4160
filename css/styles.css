@@ -11458,5 +11458,6 @@ header.masthead h1, header.masthead .h1 {
 }
 
 .div1, div2{
-display: inline-block;
+  flex: 50%
+  display: inline-block;
 }
