@@ -137,9 +137,9 @@
                             the pitch, roll, or yaw value would increment or decrement continuously. In the video below, the first, second, and third
                             value printed to the serial monitor represent the pitch, roll, and yaw values respectively. You can see that when I only
                             rotate the board on one of its axes, only one value changes drastically while the other two remain relatively constant:
-                            
+                            <br> <br>
                             <iframe width="560" height="315" src="https://www.youtube.com/embed/fYuPevBoGvg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                            
+                            <br>
                             The gyroscope data can be used to perform dead reckoning calculations, but a drawback of this method is the accumulation
                             of error over time. On the other hand, accelerometer measurements do not risk bias due to unbounded error since the force
                             of gravity is constant; however, the measurements are more susceptible to noice, hence why we built a low pass filter. In order
@@ -151,13 +151,25 @@
                             <br><br>
                         </p>
                             <iframe width="560" height="315" src="https://www.youtube.com/embed/yS3aLIMy5yY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                            
+                            <br>
                             <p>
-                                As you can see from the video, the combined measurements are very stable(not as much noise as the accelerometer data) 
+                                As you can see from the video, the combined measurements are very stable (not as much noise as the accelerometer data) 
                                 and relatively accurate (no drifting of values as seen with the gyroscope data). 
                             
                         <h2>Sample Data</h2>
-                        <p>body</p>
+                        <p> With the complementary-filtered data in hand, the next step is to collect rapid samples of data and transmit the values
+                        over bluetooth from the Artemis board on the robot to my laptop. First, I deleted any blocking statements from my code
+                        and measured how quickly I could sample new values. I found that the time difference between each reading ranges from 8 to 15ms. 
+                        </p>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/bQirJeK7Gmk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        
+                        <p>
+                            In the above video, I am sending IMU readings from the Artemis to my laptop. The next step is to integrate both IMU and TOF sensor
+                            readings and send them both concurrently to get a fuller picture of the robot's positioning at any given time. I decided to do this
+                            using two separate arrays, one for storing TOF data and one for IMU data. This is because TOF readings are less frequent than IMU readings,
+                            so separating them allows me to read in IMU data more frequently. 
+                        </p>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/n67UHzydZ7Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         
                         <h2>Cut the Cord</h2>
                         <p>body</p>
