@@ -50,13 +50,20 @@
                                 solder the AIN1 and BIN1, AIN2 and BIN2, AOUT1 ane BOUT1, and AOUT2 and BOUT2 pins together. I did this by soldering 
                                 a wire to partially stick through the board's hole and then bending it around to solder it to the corresponding A/B
                                 pin. To check my soldering connections and also verify the functionality of the drivers, I sent a PWM signal from 
-                                the Artemis board and scoped the output of the drivers. Here are photos of the scope setup, where the driver is powered
+                                the Artemis board and scoped the output of the drivers. I sent a PWM of 100 (roughly 50% duty cycle) and also 253 (almost
+                                100% duty cycle, but still has a dip to differentiate it from zero) using the following code where pwm is an int variable:
+                                <br><br>
+                                <code> analogWrite(6, pwm); </code>
+                                <br>
+                                <code> analogWrite(7, 0) </code>
+                                <br><br>
+                                Here are photos of the scope setup, where the driver is powered
                                 by a 3.7V power supply to emulate the 3.7V battery used in the robot, as well as the displayed oscilloscope results:
                               </p>
                           </a>
                         </div>
                         <br>
-                        <img src="assets/img/Mac_address.jpg" alt="MAC Address" width=70% height=auto/>
+                        <img src="assets/img/Oscilloscope.JPEG" alt="Oscilloscope" width=100% height=auto/>
                         
                         <br><br>
                         <div class="list-group">
