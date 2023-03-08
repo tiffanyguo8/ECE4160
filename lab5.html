@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Tiffany's Lab 5</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap Icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+        <!-- SimpleLightbox plugin CSS-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <link rel=stylesheet href="bootstrap.min.css">
+        <style>
+        body {
+          background-image: url('../assets/img/Grid_paper.webp');
+          background-repeat: no-repeat;
+          background-attachment: fixed; 
+          background-size: cover;
+        }
+        </style>
+    </head>
+    <body id="page-top">
+          
+        <!-- About-->
+        <section class="page-section bg-warning" id="about">
+            <p style="background-image: url('../assets/img/Grid_paper.webp');">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2> Lab 5: Motors and Open Loop Control</h2>
+                        <hr class="divider divider-light" />
+                        <p> In this lab, I assembled the entire robot! I first drove the motors using dual motor drivers, opened the Force1 RC car and
+                            attached my drivers to the car's motors, and then ran various open loop control tests. </p>
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Prelab</h5>
+                            </div>
+                            <p class="mb-1">The code for this lab was run on a virtual environment on my laptop titled "FastRobots_ble", and 
+                              code for Bluetooth data transmittion was written in Arduino (for the Artemis board) and Jupyter notebook (on my laptop). 
+                              The robot uses Bluetooth Low Energy, a wireless communication protocol designed for low power at low data rates. 
+                              The Artemis board mainly acts as a peripheral device and my laptop as a central device, although both devices engage
+                              in bidirectional communication.
+                                <br><br>
+                              I ran the code from ble_arduino.ino which prints the MAC address of my Artemis board to the serial monitor:
+                              </p>
+                          </a>
+                        </div>
+                        <br>
+                        <img src="assets/img/Mac_address.jpg" alt="MAC Address" width=70% height=auto/>
+                        
+                        <br><br>
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Configurations</h5>
+                            </div>
+                            <p class="mb-1">First, to establish a BLE connection between the Artemis board and my laptop, I configured the MAC
+                              address in the connections.yaml file to match the MAC address of my Artemis board. Then, I generated a unique
+                              UUID and configured the UUID of both the devices to match.</p>
+                          </a>
+                        </div>
+                        <br>
+                        <img src="assets/img/Arduino_config.png" alt="Arduino code configurations" width=70% height=auto/>
+                        <br><br>
+                        <img src="assets/img/Python_config.png" alt="Python connection.yaml configurations" width=70% height=auto/>
+                        <br><br>
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">demo.ipynb</h5>
+                            </div>
+                            <p class="mb-1">The demo.ipynb file provided at the start of the lab contains some helpful methods and explanations in addition
+                              to code that imports the necessary libraries and establishes a connection between my laptop and the Artemis board. </p>
+                          </a>
+                        </div>
+                        <br>
+                        
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/cSMsitG3EjY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Send Echo Command</h5>
+                            </div>
+                            <p class="mb-1">ECHO: When this command is sent to the Artemis, it echos the message I sent back through Bluetooth. 
+                              For example, when I send "QUACK!" over Bluetooth, the robot says "QUACK!" back to me. </p>
+                          </a>
+                        </div>
+                        <br>
+                        
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/1BKHIjNflhk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Get Time Command</h5>
+                            </div>
+                            <p class="mb-1">GET_TIME_MILLIS: This command prompts the Artemis to write the time in milliseconds since startup to the
+                              string characteristic, where my laptop can read the time value. Time is expressed in the format T:666666, where 666666
+                              represents the result of the millis() function call in Arduino. </p>
+                          </a>
+                        </div>
+                        <br>
+                        
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/UOIQ0ZDq0n8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                                
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Notification Handler</h5>
+                            </div>
+                            <p class="mb-1">I wrote a notification handler called str_notify_handler() which handles new messages that the Artemis board
+                              writes to the BLEStringCharactersitic. When my laptop is notified of a new message, it will process the message as a time
+                              value and update the global time variable with the new updated time. This is more convenient and efficient compared to pollling 
+                              for new messages using ble.receive_string(ble.uuid['RX_STRING']). </p>
+                          </a>
+                        </div>
+                        <br>
+                        
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/oVLml4jqdms" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Get Temperature Command</h5>
+                            </div>
+                            <p class="mb-1">Building off of the previous notification handler, I added functionality to handle time and temperature
+                              values. In the first video, a temperature value is transmitted every 1 second for an interval of 5 seconds. In the second
+                              video, temperature values are continuously sent at a rapid page for 5 seconds. </p>
+                          </a>
+                        </div>
+                        <br>
+                        
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/N-xhKYGMS6U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/Khh2CgWVa8A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        
+                        <br>
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Limitations</h5>
+                            </div>
+                            <p class="mb-1">When I was trying to send the 5 seconds of rapid temperature data at first, I kept running into an error.
+                              It turns out that the storage constraints of the Artemis board are an important aspect to consider when sending data. 
+                              The Artemis board has 384 kB of RAM. Assuming that all of this RAM is being used towards data transmittion, that gives us
+                              384,000 bytes of memory. If we also assume that we are transmitting 16-bit or 2-byte values at a frequency of 150 Hz, this
+                              means that every second we are sending 300 bytes/second, and in 5 seconds we use 5*300=1500 bytes. Dividing our total 
+                              384 kB by 1500 b, we get 256; thus, we can transmit 256 5-second intervals of data with our current memory limitations.</p>
+                          </a>
+                        </div>
+                        
+                        <br>
+                        <div class="d-grid gap-2">
+                           <a class="btn btn-lg btn-primary" href="index.html">Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+            
+        <!-- Footer-->
+        <footer class="bg-light py-5">
+            <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2023 - Tiffany &Co</div></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>
