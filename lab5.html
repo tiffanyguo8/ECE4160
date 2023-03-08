@@ -55,7 +55,7 @@
                                 <br><br>
                                 <code> analogWrite(6, pwm); </code>
                                 <br>
-                                <code> analogWrite(7, 0) </code>
+                                <code> analogWrite(7, 0); </code>
                                 <br><br>
                                 Here are photos of the scope setup, where the driver is powered
                                 by a 3.7V power supply to emulate the 3.7V battery used in the robot, as well as the displayed oscilloscope results:
@@ -113,7 +113,17 @@
                             <p class="mb-1">I found that the left motor of my car tended to spin a bit faster than the right motor, causing my car
                               to veer right when it attempts to do straight-line pathing. Thus, I sent a slightly lower PWM value to the left driver
                               in order to offset this bias. Here is the code I used and a video of the straight-line test:
-                              
+                              <br><br>
+                              <code> analogWrite(6, 0); </code>
+                              <br>
+                              <code> analogWrite(7, 68);  </code>
+                              <br>
+                              <code> analogWrite(12, 65); </code>
+                              <br>
+                              <code> analogWrite(13, 0);  </code>
+                              <br>
+                              <code> delay(16000);  </code>
+                              <br><br>
                             </p>
                           </a>
                         </div>
