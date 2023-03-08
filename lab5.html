@@ -64,9 +64,8 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Driving Motors</h5>
                             </div>
-                            <p class="mb-1">First, to establish a BLE connection between the Artemis board and my laptop, I configured the MAC
-                              address in the connections.yaml file to match the MAC address of my Artemis board. Then, I generated a unique
-                              UUID and configured the UUID of both the devices to match.</p>
+                            <p class="mb-1">Next, I took apart the car and soldered the drivers to the motors and the car battery. Here are videos of
+                              the car first running on the power supply and spinning its wheels in both directions, and then running on the battery: </p>
                           </a>
                         </div>
                         <br>
@@ -80,8 +79,8 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Assembled Robot</h5>
                             </div>
-                            <p class="mb-1">The demo.ipynb file provided at the start of the lab contains some helpful methods and explanations in addition
-                              to code that imports the necessary libraries and establishes a connection between my laptop and the Artemis board. </p>
+                            <p class="mb-1">Here's what the first prototype of my robot looks like, with zip ties and tape to hold the sensors,
+                              drivers, battery, and Artemis board in place: </p>
                           </a>
                         </div>
                         <br>
@@ -93,8 +92,9 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Lower PWM Limit</h5>
                             </div>
-                            <p class="mb-1">ECHO: When this command is sent to the Artemis, it echos the message I sent back through Bluetooth. 
-                              For example, when I send "QUACK!" over Bluetooth, the robot says "QUACK!" back to me. </p>
+                            <p class="mb-1">After experimenting by continuously decreasing the PWM send to the motors, I found that the two motors
+                              behaved a little differently, and their lower PWM limit is around 40 to 50. This value varied a bit since a few factors,
+                              such as whether the car starts from rest or in motion, can have a significant effect. </p>
                           </a>
                         </div>
                         <br>
@@ -106,9 +106,11 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Calibration</h5>
                             </div>
-                            <p class="mb-1">GET_TIME_MILLIS: This command prompts the Artemis to write the time in milliseconds since startup to the
-                              string characteristic, where my laptop can read the time value. Time is expressed in the format T:666666, where 666666
-                              represents the result of the millis() function call in Arduino. </p>
+                            <p class="mb-1">I found that the left motor of my car tended to spin a bit faster than the right motor, causing my car
+                              to veer right when it attempts to do straight-line pathing. Thus, I sent a slightly lower PWM value to the left driver
+                              in order to offset this bias. Here is the code I used and a video of the straight-line test:
+                              
+                            </p>
                           </a>
                         </div>
                         <br>
@@ -120,10 +122,7 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Open Loop Control</h5>
                             </div>
-                            <p class="mb-1">I wrote a notification handler called str_notify_handler() which handles new messages that the Artemis board
-                              writes to the BLEStringCharactersitic. When my laptop is notified of a new message, it will process the message as a time
-                              value and update the global time variable with the new updated time. This is more convenient and efficient compared to pollling 
-                              for new messages using ble.receive_string(ble.uuid['RX_STRING']). </p>
+                            <p class="mb-1">Lastly, I wrote some open-loop code to make the robot drive and perform spins!</p>
                           </a>
                         </div>
                         <br>
