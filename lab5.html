@@ -43,15 +43,15 @@
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Prelab</h5>
+                              <h5 class="mb-1">Scoping PWM signal</h5>
                             </div>
-                            <p class="mb-1">The code for this lab was run on a virtual environment on my laptop titled "FastRobots_ble", and 
-                              code for Bluetooth data transmittion was written in Arduino (for the Artemis board) and Jupyter notebook (on my laptop). 
-                              The robot uses Bluetooth Low Energy, a wireless communication protocol designed for low power at low data rates. 
-                              The Artemis board mainly acts as a peripheral device and my laptop as a central device, although both devices engage
-                              in bidirectional communication.
-                                <br><br>
-                              I ran the code from ble_arduino.ino which prints the MAC address of my Artemis board to the serial monitor:
+                            <p class="mb-1">The first task in this lab was to solder the two DRV8833 dual motor drivers to the Artemis board. This
+                                was a bit challenging since we are using the dual motor driver to control a single motor each, meaning I needed to
+                                solder the AIN1 and BIN1, AIN2 and BIN2, AOUT1 ane BOUT1, and AOUT2 and BOUT2 pins together. I did this by soldering 
+                                a wire to partially stick through the board's hole and then bending it around to solder it to the corresponding A/B
+                                pin. To check my soldering connections and also verify the functionality of the drivers, I sent a PWM signal from 
+                                the Artemis board and scoped the output of the drivers. Here are photos of the scope setup, where the driver is powered
+                                by a 3.7V power supply to emulate the 3.7V battery used in the robot, as well as the displayed oscilloscope results:
                               </p>
                           </a>
                         </div>
@@ -62,7 +62,7 @@
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Configurations</h5>
+                              <h5 class="mb-1">Driving Motors</h5>
                             </div>
                             <p class="mb-1">First, to establish a BLE connection between the Artemis board and my laptop, I configured the MAC
                               address in the connections.yaml file to match the MAC address of my Artemis board. Then, I generated a unique
@@ -78,7 +78,7 @@
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">demo.ipynb</h5>
+                              <h5 class="mb-1">Assembled Robot</h5>
                             </div>
                             <p class="mb-1">The demo.ipynb file provided at the start of the lab contains some helpful methods and explanations in addition
                               to code that imports the necessary libraries and establishes a connection between my laptop and the Artemis board. </p>
@@ -91,7 +91,7 @@
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Send Echo Command</h5>
+                              <h5 class="mb-1">Lower PWM Limit</h5>
                             </div>
                             <p class="mb-1">ECHO: When this command is sent to the Artemis, it echos the message I sent back through Bluetooth. 
                               For example, when I send "QUACK!" over Bluetooth, the robot says "QUACK!" back to me. </p>
@@ -104,7 +104,7 @@
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Get Time Command</h5>
+                              <h5 class="mb-1">Calibration</h5>
                             </div>
                             <p class="mb-1">GET_TIME_MILLIS: This command prompts the Artemis to write the time in milliseconds since startup to the
                               string characteristic, where my laptop can read the time value. Time is expressed in the format T:666666, where 666666
@@ -118,7 +118,7 @@
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Notification Handler</h5>
+                              <h5 class="mb-1">Open Loop Control</h5>
                             </div>
                             <p class="mb-1">I wrote a notification handler called str_notify_handler() which handles new messages that the Artemis board
                               writes to the BLEStringCharactersitic. When my laptop is notified of a new message, it will process the message as a time
@@ -129,36 +129,6 @@
                         <br>
                         
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/oVLml4jqdms" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        
-                        <div class="list-group">
-                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                            <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Get Temperature Command</h5>
-                            </div>
-                            <p class="mb-1">Building off of the previous notification handler, I added functionality to handle time and temperature
-                              values. In the first video, a temperature value is transmitted every 1 second for an interval of 5 seconds. In the second
-                              video, temperature values are continuously sent at a rapid page for 5 seconds. </p>
-                          </a>
-                        </div>
-                        <br>
-                        
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/N-xhKYGMS6U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/Khh2CgWVa8A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        
-                        <br>
-                        <div class="list-group">
-                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Limitations</h5>
-                            </div>
-                            <p class="mb-1">When I was trying to send the 5 seconds of rapid temperature data at first, I kept running into an error.
-                              It turns out that the storage constraints of the Artemis board are an important aspect to consider when sending data. 
-                              The Artemis board has 384 kB of RAM. Assuming that all of this RAM is being used towards data transmittion, that gives us
-                              384,000 bytes of memory. If we also assume that we are transmitting 16-bit or 2-byte values at a frequency of 150 Hz, this
-                              means that every second we are sending 300 bytes/second, and in 5 seconds we use 5*300=1500 bytes. Dividing our total 
-                              384 kB by 1500 b, we get 256; thus, we can transmit 256 5-second intervals of data with our current memory limitations.</p>
-                          </a>
-                        </div>
                         
                         <br>
                         <div class="d-grid gap-2">
