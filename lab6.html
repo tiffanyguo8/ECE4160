@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Tiffany's Lab 5</title>
+        <title>Tiffany's Lab 6</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap Icons-->
@@ -35,15 +35,16 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-8 text-center">
-                        <h2> Lab 5: Motors and Open Loop Control</h2>
+                        <h2> Lab 6: Closed Loop Control using PID</h2>
                         <hr class="divider divider-light" />
-                        <p> In this lab, I assembled the entire robot! I first drove the motors using dual motor drivers, opened the Force1 RC car and
-                            attached my drivers to the car's motors, and then ran various open loop control tests. </p>
+                        <p> In this lab, I first improved my code structure to store chunks of data on the Artemis board and send data only when requested over BLE. 
+                        Next, I drove the robot towards a wall and implemented PID control to stop the robot within 1 foot of the wall. I used the front-facing 
+                            Time of Flight on the robot to collect data which was then used to calculate the error value for the PID controller. </p>
                         
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Scoping PWM signal</h5>
+                              <h5 class="mb-1">Prelab / BLE</h5>
                             </div>
                             <p class="mb-1">The first task in this lab was to solder the two DRV8833 dual motor drivers to the Artemis board. This
                                 was a bit challenging since we are using the dual motor driver to control a single motor each, meaning I needed to
@@ -69,7 +70,7 @@
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Driving Motors</h5>
+                              <h5 class="mb-1">Position Control using Proportional constant P(ID)</h5>
                             </div>
                             <p class="mb-1">Next, I took apart the car and soldered the drivers to the motors and the car battery. Here are videos of
                               the car first running on the power supply and spinning its wheels in both directions, and then running on the battery: </p>
@@ -82,7 +83,7 @@
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Assembled Robot</h5>
+                              <h5 class="mb-1">Position Control using Proportional and Derivative constants P(I)D</h5>
                             </div>
                             <p class="mb-1">Here's what the first prototype of my robot looks like, with zip ties and tape to hold the sensors,
                               drivers, battery, and Artemis board in place: </p>
@@ -92,54 +93,6 @@
                         
                         <img src="assets/img/labeled_robot.jpg" alt="Assembled Robot" width=70% height=auto/>
                         <br><br>
-                        
-                        <div class="list-group">
-                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Lower PWM Limit</h5>
-                            </div>
-                            <p class="mb-1">After experimenting by continuously decreasing the PWM send to the motors, I found that the two motors
-                              behaved a little differently, and their lower PWM limit is around 40 to 50. This value varied a bit since a few factors,
-                              such as whether the car starts from rest or in motion, can have a significant effect. </p>
-                          </a>
-                        </div>
-                        <br>
-                                                
-                        <div class="list-group">
-                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                            <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Calibration</h5>
-                            </div>
-                            <p class="mb-1">I found that the left motor of my car tended to spin a bit faster than the right motor, causing my car
-                              to veer right when it attempts to do straight-line pathing. Thus, I sent a slightly lower PWM value to the left driver
-                              in order to offset this bias. Here is the code I used and a video of the straight-line test:
-                              <br><br>
-                              <code> analogWrite(6, 0); </code>
-                              <br>
-                              <code> analogWrite(7, 68);  </code>
-                              <br>
-                              <code> analogWrite(12, 65); </code>
-                              <br>
-                              <code> analogWrite(13, 0);  </code>
-                              <br>
-                              <code> delay(16000);  </code>
-                              <br><br>
-                            </p>
-                          </a>
-                        </div>
-                        <br>
-                        
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/A3xgeKAwvQs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                                                
-                        
-                        <div class="list-group">
-                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Open Loop Control</h5>
-                            </div>
-                            <p class="mb-1">Lastly, I wrote some open-loop code to make the robot drive and perform spins!</p>
-                          </a>
-                        </div>
-                        <br>
                         
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/1Xso8PIEOwI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                        
                         <br>
