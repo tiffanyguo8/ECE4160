@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Tiffany's Lab 5</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap Icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+        <!-- SimpleLightbox plugin CSS-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <link rel=stylesheet href="bootstrap.min.css">
+        <style>
+        body {
+          background-image: url('../assets/img/Grid_paper.webp');
+          background-repeat: no-repeat;
+          background-attachment: fixed; 
+          background-size: cover;
+        }
+        </style>
+    </head>
+    <body id="page-top">
+          
+        <!-- About-->
+        <section class="page-section bg-warning" id="about">
+            <p style="background-image: url('../assets/img/Grid_paper.webp');">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2> Lab 5: Motors and Open Loop Control</h2>
+                        <hr class="divider divider-light" />
+                        <p> In this lab, I assembled the entire robot! I first drove the motors using dual motor drivers, opened the Force1 RC car and
+                            attached my drivers to the car's motors, and then ran various open loop control tests. </p>
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Scoping PWM signal</h5>
+                            </div>
+                            <p class="mb-1">The first task in this lab was to solder the two DRV8833 dual motor drivers to the Artemis board. This
+                                was a bit challenging since we are using the dual motor driver to control a single motor each, meaning I needed to
+                                solder the AIN1 and BIN1, AIN2 and BIN2, AOUT1 ane BOUT1, and AOUT2 and BOUT2 pins together. I did this by soldering 
+                                a wire to partially stick through the board's hole and then bending it around to solder it to the corresponding A/B
+                                pin. To check my soldering connections and also verify the functionality of the drivers, I sent a PWM signal from 
+                                the Artemis board and scoped the output of the drivers. I sent a PWM of 100 (roughly 50% duty cycle) and also 253 (almost
+                                100% duty cycle, but still has a dip to differentiate it from zero) using the following code where pwm is an int variable:
+                                <br><br>
+                                <code> analogWrite(6, pwm); </code>
+                                <br>
+                                <code> analogWrite(7, 0); </code>
+                                <br><br>
+                                Here are photos of the scope setup, where the driver is powered
+                                by a 3.7V power supply to emulate the 3.7V battery used in the robot, as well as the displayed oscilloscope results:
+                              </p>
+                          </a>
+                        </div>
+                        <br>
+                        <img src="assets/img/Oscilloscope.JPEG" alt="Oscilloscope" width=100% height=auto/>
+                        
+                        <br><br>
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Driving Motors</h5>
+                            </div>
+                            <p class="mb-1">Next, I took apart the car and soldered the drivers to the motors and the car battery. Here are videos of
+                              the car first running on the power supply and spinning its wheels in both directions, and then running on the battery: </p>
+                          </a>
+                        </div>
+                        <br>
+
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/ksA_950Vagc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Assembled Robot</h5>
+                            </div>
+                            <p class="mb-1">Here's what the first prototype of my robot looks like, with zip ties and tape to hold the sensors,
+                              drivers, battery, and Artemis board in place: </p>
+                          </a>
+                        </div>
+                        <br>
+                        
+                        <img src="assets/img/labeled_robot.jpg" alt="Assembled Robot" width=70% height=auto/>
+                        <br><br>
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Lower PWM Limit</h5>
+                            </div>
+                            <p class="mb-1">After experimenting by continuously decreasing the PWM send to the motors, I found that the two motors
+                              behaved a little differently, and their lower PWM limit is around 40 to 50. This value varied a bit since a few factors,
+                              such as whether the car starts from rest or in motion, can have a significant effect. </p>
+                          </a>
+                        </div>
+                        <br>
+                                                
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Calibration</h5>
+                            </div>
+                            <p class="mb-1">I found that the left motor of my car tended to spin a bit faster than the right motor, causing my car
+                              to veer right when it attempts to do straight-line pathing. Thus, I sent a slightly lower PWM value to the left driver
+                              in order to offset this bias. Here is the code I used and a video of the straight-line test:
+                              <br><br>
+                              <code> analogWrite(6, 0); </code>
+                              <br>
+                              <code> analogWrite(7, 68);  </code>
+                              <br>
+                              <code> analogWrite(12, 65); </code>
+                              <br>
+                              <code> analogWrite(13, 0);  </code>
+                              <br>
+                              <code> delay(16000);  </code>
+                              <br><br>
+                            </p>
+                          </a>
+                        </div>
+                        <br>
+                        
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/A3xgeKAwvQs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                                                
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Open Loop Control</h5>
+                            </div>
+                            <p class="mb-1">Lastly, I wrote some open-loop code to make the robot drive and perform spins!</p>
+                          </a>
+                        </div>
+                        <br>
+                        
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/1Xso8PIEOwI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                        
+                        <br>
+                        <img src="assets/img/Motor_code1.png" alt="Open loop motor code" width=30% height=auto/>
+                        <img src="assets/img/Motor_code2.png" alt="Open loop motor code" width=30% height=auto/>
+                        <br>
+                        <br>
+                        <div class="d-grid gap-2">
+                           <a class="btn btn-lg btn-primary" href="index.html">Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+            
+        <!-- Footer-->
+        <footer class="bg-light py-5">
+            <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2023 - Tiffany &Co</div></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>
