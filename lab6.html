@@ -83,7 +83,8 @@
                               My goal is to drive the car as fast as I can in the beginning while still stopping it short of colliding with the wall with 
                               as little oscillation as possible. To find the optimal parameters for the PID control system, I used the following heuristic from class: 
                               <br><br>
-                              1. Set k_p to small value, k_d and k_i to 0.<br>
+                              1. Set k_p to small value, k_d and k_i to 0.
+                                <br><br>
                                 <p class="text-info">2. Increase k_d until oscillation, then decrease by a factor of 2 to 4. </p>
                                 <p class="text-success">3. Increase k_p until oscillation or overshoot, then decrease by a factor of 2 to 4. </p>
                                 <p class="text-danger">4. Increase k_i until oscillation or overshoot. </p>
@@ -110,22 +111,28 @@
                         <p class="text-danger">k_i = 0.125 </p>
                         <br>
                         <script src="https://gist.github.com/tiffanyguo8/c60dd8f5293b7445ac735170cac04837.js"></script>
-                        <br>
+
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/Cw2HHaHXPYw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         
                         <div class="list-group">
                               <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                                <p class="mb-1">In my main loop, I also added new logic for the storing and transmission of data. Previously, I would send data over Bluetooth
-                                right as I received it, which caused significant delay in my data collection process. My code now stores data in arrays on the 
-                                Artemis board and only sends data when it is requested over Bluetooth. This is done by sending a GET_DATA command in my Python code;
-                                in my Arduino command handler, I set a flag which triggers data to be written to BLE in the main loop. 
+                                <p class="mb-1">Here are graphs of the time of flight sensor readings and their corresponding pwm outputs over time. The robot starts out
+                                    far away from the wall, so it has high readings for both distance and pwm. As it moves closer to the wall and eventually overshoots
+                                    the 304cm setpoint distance, the pwm dips into the negatives to reverse the car's position and bring it closer to the setpoint. I am 
+                                    not sure why there is some oscillation at the beginning when the distance readings should be relatively stable, but I will have to 
+                                    investigate the TOF data in more detail to see the source of the problem. 
+                                    
+                                    I made the arrays for storing TOF and speed data 1000 ints long, so given that my TOF sensors sample new data roughly 2 times
+                                    per second, my data structure can hold approximately 500 seconds of data, or over 8 minutes. With these structures as well as
+                                    additional arrays I created to store the time and imu readings, my code used 37% of dynamic memory during compilation, meaning
+                                    there is still room for storage of even more data and for longer periods of time if needed. 
                                 </p>    
                             </a>
                         </div>
                         <br>
                     
-                        <img src="assets/img/pid_distance.png" alt="Distance" width=30% height=auto/>
-                        <img src="assets/img/pid_pwm.png" alt="PWM" width=30% height=auto/>
+                        <img src="assets/img/pid_distance.png" alt="Distance" width=45% height=auto/>
+                        <img src="assets/img/pid_pwm.png" alt="PWM" width=45% height=auto/>
                     
                         <div class="d-grid gap-2">
                            <a class="btn btn-lg btn-primary" href="index.html">Home</a>
