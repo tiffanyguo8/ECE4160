@@ -55,23 +55,30 @@
                         <br>
                             <script src="https://gist.github.com/tiffanyguo8/01cf86b6683713e6339b89afb6931930.js"></script>
                             <script src="https://gist.github.com/tiffanyguo8/5c7244c81fc015d97b80d1e78e3e4de3.js"></script>
-                        <p class="mb-1">In my main loop, I also added new logic for the storing and transmission of data. Previously, I would send data over Bluetooth
+                        
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <p class="mb-1">In my main loop, I also added new logic for the storing and transmission of data. Previously, I would send data over Bluetooth
                             right as I received it, which caused significant delay in my data collection process. My code now stores data in arrays on the 
                             Artemis board and only sends data when it is requested over Bluetooth. This is done by sending a GET_DATA command in my Python code;
                             in my Arduino command handler, I set a flag which triggers data to be written to BLE in the main loop. 
-                        </p>
+                            </p>    
+                        </a>
+                    </div>
+
                             <script src="https://gist.github.com/tiffanyguo8/7d4eaaddc3d1df802f5fcba9b3a0eb5d.js"></script>
                         <br>
                         
                         <div class="list-group">
-                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Position Control</h5>
                             </div>
                             <p class="mb-1"> For this lab, I chose to implement Task A, which is to use PID control to drive my robot towards a wall and
                                stop it when it reaches exactly 304cm from the wall. The input to the PID controller is the distance readings from the time
                                of flight sensor, and the output is the new PWM values used to drive the motors. 
-                               <br>
+                               <br><br>
                                Implementing the PID algorithm is simple, but the challenge comes from finding suitable constants for a well-tuned system.
                               My goal is to drive the car as fast as I can in the beginning while still stopping it short of colliding with the wall with 
                               as little oscillation as possible. To find the optimal parameters for the PID control system, I used the following heuristic from class: 
