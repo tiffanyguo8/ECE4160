@@ -106,7 +106,13 @@
                         <p class="text-danger">k_i = 0.125 </p>
                         <br>
                         <script src="https://gist.github.com/tiffanyguo8/c60dd8f5293b7445ac735170cac04837.js"></script>
-
+                    
+                        <p class="mb-1">In my pid function, I added deadband caps so that if the pwm being sent was too low for the motors to actually turn,
+                            I simply raised them to the minimum driving pwm. I also capped the maximum pwm value at 255 since that is the maximum duty cycle
+                            of the motors. Below is a compilation of videos I took throughout the process of adjusting the PID parameters. I start out by turning
+                            up the P and D terms, then decreasing them and adding the I term so that the robot can stop short of the wall and correct its position. 
+                            </p>    
+                    
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/Cw2HHaHXPYw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         
                         <div class="list-group">
