@@ -83,7 +83,7 @@
                               My goal is to drive the car as fast as I can in the beginning while still stopping it short of colliding with the wall with 
                               as little oscillation as possible. To find the optimal parameters for the PID control system, I used the following heuristic from class: 
                               <br><br>
-                              1. Set k_p to small value, k_d and k_i to 0.
+                              1. Set k_p to small value, k_d and k_i to 0.<br>
                                 <p class="text-info">2. Increase k_d until oscillation, then decrease by a factor of 2 to 4. </p>
                                 <p class="text-success">3. Increase k_p until oscillation or overshoot, then decrease by a factor of 2 to 4. </p>
                                 <p class="text-danger">4. Increase k_i until oscillation or overshoot. </p>
@@ -96,18 +96,18 @@
                         <p class="mb-1"> Using the above heuristic, I calculated the following parameter values which allowed my robot
                         to quickly move towards the wall but stop before collision, adjusting to be around 304cm from the wall. </p>
                         <br>
-                        <p class="text-success">k_p = 0.08 </p>
                          <div class="progress">
                           <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                         <p class="text-info">k_d = 0.2 </p>
+                         <p class="text-success">k_p = 0.08 </p>
                         <div class="progress">
                           <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <p class="text-danger">k_i = 0.125 </p>
+                        <p class="text-info">k_d = 0.2 </p>
                         <div class="progress">
                           <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
+                        <p class="text-danger">k_i = 0.125 </p>
                         <br>
                         <script src="https://gist.github.com/tiffanyguo8/c60dd8f5293b7445ac735170cac04837.js"></script>
                         <br>
@@ -124,8 +124,8 @@
                         </div>
                         <br>
                     
-                        <img src="assets/img/pid_distance.png" alt="Distance" width=50% height=auto/>
-                        <img src="assets/img/pid_pwm.png" alt="PWM" width=50% height=auto/>
+                        <img src="assets/img/pid_distance.png" alt="Distance" width=30% height=auto/>
+                        <img src="assets/img/pid_pwm.png" alt="PWM" width=30% height=auto/>
                     
                         <div class="d-grid gap-2">
                            <a class="btn btn-lg btn-primary" href="index.html">Home</a>
