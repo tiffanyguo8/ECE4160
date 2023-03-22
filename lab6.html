@@ -67,8 +67,13 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Position Control using Proportional constant P(ID)</h5>
                             </div>
-                            <p class="mb-1">Next, I took apart the car and soldered the drivers to the motors and the car battery. Here are videos of
-                              the car first running on the power supply and spinning its wheels in both directions, and then running on the battery: </p>
+                            <p class="mb-1" For this lab, I chose to implement Task A, which is to use PID control to drive my robot towards a wall and
+                               stop it when it reaches exactly 304cm from the wall. The input to the PID controller is the distance readings from the time
+                               of flight sensor, and the output is the new PWM values used to drive the motors. 
+                               <br>
+                               Implementing the PID algorithm is simple, but the challenge comes from finding suitable constants for a well-tuned system.
+                              My goal is to drive the car as fast as I can in the beginning while still stopping it short of colliding with the wall with 
+                              as little oscillation as possible. Following the heuristic from class, my strategy was to start by tuning the proportional constant. </p>
                           </a>
                         </div>
                         <br>
