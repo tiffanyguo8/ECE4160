@@ -119,9 +119,7 @@
                               <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                                 <p class="mb-1">Here are graphs of the time of flight sensor readings and their corresponding pwm outputs over time. The robot starts out
                                     far away from the wall, so it has high readings for both distance and pwm. As it moves closer to the wall and eventually overshoots
-                                    the 304cm setpoint distance, the pwm dips into the negatives to reverse the car's position and bring it closer to the setpoint. I am 
-                                    not sure why there is some oscillation at the beginning when the distance readings should be relatively stable, but I will have to 
-                                    investigate the TOF data in more detail to see the source of the problem. 
+                                    the 304cm setpoint distance, the pwm dips into the negatives to reverse the car's position and bring it closer to the setpoint.
                                     <br><br>
                                     I made the arrays for storing TOF and speed data 1000 ints long, so given that my TOF sensors sample new data roughly 2 times
                                     per second, my data structure can hold approximately 500 seconds of data, or over 8 minutes. With these structures as well as
