@@ -46,25 +46,15 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Prelab / BLE</h5>
                             </div>
-                            <p class="mb-1">The first task in this lab was to solder the two DRV8833 dual motor drivers to the Artemis board. This
-                                was a bit challenging since we are using the dual motor driver to control a single motor each, meaning I needed to
-                                solder the AIN1 and BIN1, AIN2 and BIN2, AOUT1 ane BOUT1, and AOUT2 and BOUT2 pins together. I did this by soldering 
-                                a wire to partially stick through the board's hole and then bending it around to solder it to the corresponding A/B
-                                pin. To check my soldering connections and also verify the functionality of the drivers, I sent a PWM signal from 
-                                the Artemis board and scoped the output of the drivers. I sent a PWM of 100 (roughly 50% duty cycle) and also 253 (almost
-                                100% duty cycle, but still has a dip to differentiate it from zero) using the following code where pwm is an int variable:
+                            <p class="mb-1">Before embarking on the main lab task, I first reorganized my code file structure and my system for sending data
+                                from the Artemis board to my laptop over Bluetooth. I broke down my Arduino file into one main file and two .h/.cpp files, one
+                                for motor functions and one for bluetooth commands. 
                                 <br><br>
-                                <code> analogWrite(6, pwm); </code>
-                                <br>
-                                <code> analogWrite(7, 0); </code>
-                                <br><br>
-                                Here are photos of the scope setup, where the driver is powered
-                                by a 3.7V power supply to emulate the 3.7V battery used in the robot, as well as the displayed oscilloscope results:
+                                <script src="https://gist.github.com/tiffanyguo8/01cf86b6683713e6339b89afb6931930.js"></script>
                               </p>
                           </a>
                         </div>
                         <br>
-                        <img src="assets/img/Oscilloscope.JPEG" alt="Oscilloscope" width=100% height=auto/>
                         
                         <br><br>
                         <div class="list-group">
