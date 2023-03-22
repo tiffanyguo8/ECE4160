@@ -55,17 +55,12 @@
                         <br>
                             <script src="https://gist.github.com/tiffanyguo8/01cf86b6683713e6339b89afb6931930.js"></script>
                             <script src="https://gist.github.com/tiffanyguo8/5c7244c81fc015d97b80d1e78e3e4de3.js"></script>
-                        
-                        
-                        <div class="list-group">
-                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+
                             <p class="mb-1">In my main loop, I also added new logic for the storing and transmission of data. Previously, I would send data over Bluetooth
                             right as I received it, which caused significant delay in my data collection process. My code now stores data in arrays on the 
                             Artemis board and only sends data when it is requested over Bluetooth. This is done by sending a GET_DATA command in my Python code;
                             in my Arduino command handler, I set a flag which triggers data to be written to BLE in the main loop. 
                             </p>    
-                        </a>
-                    </div>
                     <br>
                             <script src="https://gist.github.com/tiffanyguo8/7d4eaaddc3d1df802f5fcba9b3a0eb5d.js"></script>
                         <br>
@@ -121,7 +116,7 @@
                                     the 304cm setpoint distance, the pwm dips into the negatives to reverse the car's position and bring it closer to the setpoint. I am 
                                     not sure why there is some oscillation at the beginning when the distance readings should be relatively stable, but I will have to 
                                     investigate the TOF data in more detail to see the source of the problem. 
-                                    
+                                    <br><br>
                                     I made the arrays for storing TOF and speed data 1000 ints long, so given that my TOF sensors sample new data roughly 2 times
                                     per second, my data structure can hold approximately 500 seconds of data, or over 8 minutes. With these structures as well as
                                     additional arrays I created to store the time and imu readings, my code used 37% of dynamic memory during compilation, meaning
