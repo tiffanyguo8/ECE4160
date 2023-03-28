@@ -55,7 +55,13 @@
                         </a>
                     </div>
                         <br>
-
+                            <img src="assets/img/kf_tof_1.png" alt="KF" width=30% height=auto/>
+                            <img src="assets/img/kf_pwm_1.png" alt="KF" width=30% height=auto/>
+                            <img src="assets/img/kf_vel_1.png" alt="KF" width=30% height=auto/>
+                            <img src="assets/img/kf_tof_2.png" alt="KF" width=30% height=auto/>
+                            <img src="assets/img/kf_pwm_2.png" alt="KF" width=30% height=auto/>
+                            <img src="assets/img/kf_vel_2.png" alt="KF" width=30% height=auto/>
+                        
                             <p class="mb-1">In my main loop, I also added new logic for the storing and transmission of data. Previously, I would send data over Bluetooth
                             right as I received it, which caused significant delay in my data collection process. My code now stores data in arrays on the 
                             Artemis board and only sends data when it is requested over Bluetooth. This is done by sending a GET_DATA command in my Python code;
