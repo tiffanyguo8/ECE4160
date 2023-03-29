@@ -52,16 +52,17 @@
                                 In order to create a suitable Kalman filter for my robot, I first defined a state space model based off of Prof. Petersen's
                                 lecture. The model is as follows:
                                 
-                                
+                                <img src="assets/img/kf_state_space.png" alt="State Space Model" width=60% height=auto/>
                                 
                                 In this model, let's define matrix A as the square matrix with the -d/m term, and matrix B as the [0, 1/m] matrix. 
                                 These matrices involve the d and m coefficients, which represent the drag and momentum of the robot as it moves.
                                 The equations for d and m are as follows:
                                 
+                                <img src="assets/img/kf_d_m.png" alt="Drag and Momentum equations" width=60% height=auto/>
                                 
-                                
-                                In order to find the values of drag and momentum for my robot, I triggered a step response and measure the ToF sensor readings and PWM 
-                                input as the robot moved. I then plotted graphs of the position (u), pwm, and velocity (x') of the robot:
+                                In order to find the values of drag and momentum for my robot, I triggered a step response and measured the ToF sensor readings and PWM 
+                                input as the robot moved. I drove the robot at a PWM of 80, since that was the approximate speed it drove during PID in the previous lab. 
+                                I then plotted graphs of the position (u), pwm, and velocity (x') of the robot:
                             </p>    
                         </a>
                     </div>
@@ -73,10 +74,10 @@
                             <img src="assets/img/kf_pwm_2.png" alt="KF" width=30% height=auto/>
                             <img src="assets/img/kf_vel_2.png" alt="KF" width=30% height=auto/>
                         
-                            <p class="mb-1">In my main loop, I also added new logic for the storing and transmission of data. Previously, I would send data over Bluetooth
-                            right as I received it, which caused significant delay in my data collection process. My code now stores data in arrays on the 
-                            Artemis board and only sends data when it is requested over Bluetooth. This is done by sending a GET_DATA command in my Python code;
-                            in my Arduino command handler, I set a flag which triggers data to be written to BLE in the main loop. 
+                            <p class="mb-1">
+                                From these graphs, I can determine the steady state velocity, which is the (peak) velocity at which the robot stops accelerating,
+                                and the 90% rise time, which is the time it takes to reach 90% of the steady state velocity. These values are then used to calculate drag and
+                                momentum using the previous equations. 
                             </p>    
                     <br>
                             <script src="https://gist.github.com/tiffanyguo8/7d4eaaddc3d1df802f5fcba9b3a0eb5d.js"></script>
