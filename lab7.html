@@ -37,10 +37,11 @@
                     <div class="col-lg-8 text-center">
                         <h2> Lab 7: Kalman Filter</h2>
                         <hr class="divider divider-light" />
-                        <p> In this lab, I implemented a Kalman filter for my robot. In order to achieve more granular data, which can be used
-                        to execute more precise movement control, the Kalman filter supplements the sampled ToF sensor values. The goal is to 
-                        find the optimal combination of ToF data and position prediction based on pwm input to find the most precise estimate
-                        of the robot's actual position. </p>
+                        <p> In this lab, I implemented a Kalman filter for my robot. The Kalman filter supplements sampled ToF sensor values
+                            in order to achieve more granular data, which can be use to execute more precise movement control. The goal is to 
+                            find the optimal combination of ToF data and position prediction based on pwm input to find the most precise estimate
+                            of the robot's actual position. With this increased control, the robot will be able to speed more quickly towards the
+                            wall while still stopping at precisely the 1 ft setpoint distance. </p>
                         
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
@@ -48,9 +49,19 @@
                               <h5 class="mb-1">Estimate drag and momentum</h5>
                             </div>
                             <p class="mb-1">
-                                First, I need to estimate the drag and momentum matrices, which are represented by the variables A and B in the KF equations.
-                                To do this, I will drive a step response and measure the ToF sensor readings and PWM input from the robot. Below are the graphs
-                                of the data I collected. I took the derivative of the position graph (created using ToF data) to display the velocity graph. 
+                                In order to create a suitable Kalman filter for my robot, I first defined a state space model based off of Prof. Petersen's
+                                lecture. The model is as follows:
+                                
+                                
+                                
+                                In this model, let's define matrix A as the square matrix with the -d/m term, and matrix B as the [0, 1/m] matrix. 
+                                These matrices involve the d and m coefficients, which represent the drag and momentum of the robot as it moves.
+                                The equations for d and m are as follows:
+                                
+                                
+                                
+                                In order to find the values of drag and momentum for my robot, I triggered a step response and measure the ToF sensor readings and PWM 
+                                input as the robot moved. I then plotted graphs of the position (u), pwm, and velocity (x') of the robot:
                             </p>    
                         </a>
                     </div>
