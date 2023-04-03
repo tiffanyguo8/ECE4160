@@ -148,15 +148,17 @@
                         <div class="card text-white bg-success mb-3" style="max-width: 50rem;">
                           <div class="card-header">3. Initialize state vector, x</div>
                           <div class="card-body">
-                            <h4 class="card-title">Warning card title</h4>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                              <p class="card-text"> <code> x = np.array([[-tof_data[0]],[0]]) </code> </p>
                           </div>
                         </div>
                         <div class="card text-white bg-danger mb-3" style="max-width: 50rem;">
                           <div class="card-header">4. Specify process noise and sensor noise covariance matrices</div>
                           <div class="card-body">
-                            <h4 class="card-title">Info card title</h4>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-text">Lastly, the Kalman filter requires calculation of the process noise and sensor noise matrices.
+                                The process noise matrix, Σ<sub>u</sub>, has two covariance values σ<sub>1</sub> and σ<sub>2</sub>. 
+                                The sensor noise matrix, Σ<sub>z</sub>, has one covariance value σ<sub>3</sub>. 
+                            </p>
+                              <img src="assets/img/kf_noise.png" alt="Noise Covariance Matrices" width=50% height=auto/>
                           </div>
                         </div>
                     
