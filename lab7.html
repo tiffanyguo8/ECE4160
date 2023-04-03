@@ -163,61 +163,23 @@
                               <p class="card-text">Using the same sampling rate that I calculated to discretize the A and B matrices, I can calculate
                                   σ<sub>1</sub> and σ<sub>2</sub> with the following equations:
                             </p>
-                              <img src="assets/img/process_noise_covariance.png" alt="Noise Covariance" width=70% height=auto/>
+                              <img src="assets/img/process_noise_covariance.png" alt="Noise Covariance" width=60% height=auto/>
                               <br><br>
                               <p class="card-text">Taking σ<sub>3</sub> to be 20mm, as suggested in the lecture, I now have all 3 covariance values
                                   needed to generate my noise matrices. 
                             </p>
-                              <img src="assets/img/kf_noise_matrices.png" alt="Noise Covariance" width=50% height=auto/>
+                              <img src="assets/img/kf_noise_matrices.png" alt="Noise Covariance" width=40% height=auto/>
                           </div>
                         </div>
-                    
-                        <p class="mb-1">In my pid function, I added deadband caps so that if the pwm being sent was too low for the motors to actually turn,
-                            I simply raised them to the minimum driving pwm. I also capped the maximum pwm value at 255 since that is the maximum duty cycle
-                            of the motors. Below is a compilation of videos I took throughout the process of adjusting the PID parameters. I start out by turning
-                            up the P and D terms, then decreasing them and adding the I term so that the robot can stop short of the wall and correct its position. 
-                            </p>    
-                    
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/Cw2HHaHXPYw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        
-                        <div class="list-group">
-                              <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                                <p class="mb-1">Here are graphs of the time of flight sensor readings and their corresponding pwm outputs over time. The robot starts out
-                                    far away from the wall, so it has high readings for both distance and pwm. As it moves closer to the wall and eventually overshoots
-                                    the 304cm setpoint distance, the pwm dips into the negatives to reverse the car's position and bring it closer to the setpoint.
-                                    <br><br>
-                                    I made the arrays for storing TOF and speed data 1000 ints long, so given that my TOF sensors sample new data roughly 2 times
-                                    per second, my data structure can hold approximately 500 seconds of data, or over 8 minutes. With these structures as well as
-                                    additional arrays I created to store the time and imu readings, my code used 37% of dynamic memory during compilation, meaning
-                                    there is still room for storage of even more data and for longer periods of time if needed. 
-                                </p>    
-                            </a>
-                        </div>
-                        <br>
-                    
-                        <img src="assets/img/pid_distance.png" alt="Distance" width=45% height=auto/>
-                        <img src="assets/img/pid_pwm.png" alt="PWM" width=45% height=auto/>
-                    
                     <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Implement and test Kalman Filter in Jupyter</h5>
                             </div>
-                            <p class="mb-1"> For this lab, I chose to implement Task A, which is to use PID control to drive my robot towards a wall and
-                               stop it when it reaches exactly 304cm from the wall. The input to the PID controller is the distance readings from the time
-                               of flight sensor, and the output is the new PWM values used to drive the motors. 
-                               <br><br>
-                               Implementing the PID algorithm is simple, but the challenge comes from finding suitable constants for a well-tuned system.
-                              My goal is to drive the car as fast as I can in the beginning while still stopping it short of colliding with the wall with 
-                              as little oscillation as possible. To find the optimal parameters for the PID control system, I used the following heuristic from class: 
-                              <br><br>
-                              1. Set k_p to small value, k_d and k_i to 0.
-                                <br><br>
-                                <p class="text-info">2. Increase k_d until oscillation, then decrease by a factor of 2 to 4. </p>
-                                <p class="text-success">3. Increase k_p until oscillation or overshoot, then decrease by a factor of 2 to 4. </p>
-                                <p class="text-danger">4. Increase k_i until oscillation or overshoot. </p>
-                                
+                            <p class="mb-1"> 
+                                Using the above parameters, the code to implement the Kalman filter is as follows:
                               </p>
+                              
                           </a>
                         </div>
                         <br>
