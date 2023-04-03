@@ -128,17 +128,21 @@
                             <p class="card-text">To discretize my A and B matrices, I first determined the sampling rate by finding the average
                               difference between TOF sample timestamps. I found the Δt to be 0.093 seconds.
                               <br>
-                              <img src="assets/img/sampling_frequency.png" alt="Sampling Frequency" width=50% height=auto/>
-                              <br>
-                              Using this Δt value, I implemented the following code from the lab manual to discretize the A and B matrices. </p>
+                              <img src="assets/img/sampling_frequency.png" alt="Sampling Frequency" width=30% height=auto/>
+                              <br><br>
+                              Using this Δt value, I implemented the following code from the lab manual to discretize the A and B matrices.
                               <img src="assets/img/discretized_matrices.png" alt="Discretized Matrices" width=70% height=auto/>
+                            </p>
                           </div>
                         </div>
                         <div class="card text-white bg-info mb-3" style="max-width: 50rem;">
                           <div class="card-header">2. Identify C matrix</div>
                           <div class="card-body">
-                            <h4 class="card-title">Danger card title</h4>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-text">The C matrix used in my Kalman filter is the one given in class. Since we are only measuring the
+                              negative distance from the wall, the position corresponding to velocity in the matrix is 0. 
+                                <br>
+                                <code> C = np.array([[-1, 0]]) </code>
+                            </p>
                           </div>
                         </div>
                         <div class="card text-white bg-success mb-3" style="max-width: 50rem;">
