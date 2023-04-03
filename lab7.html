@@ -159,6 +159,14 @@
                                 The sensor noise matrix, Σ<sub>z</sub>, has one covariance value σ<sub>3</sub>. 
                             </p>
                               <img src="assets/img/kf_noise.png" alt="Noise Covariance Matrices" width=50% height=auto/>
+                              <p class="card-text">Using the same sampling rate that I calculated to discretize the A and B matrices, I can calculate
+                                  σ<sub>1</sub> and σ<sub>2</sub> with the following equations:
+                            </p>
+                              <img src="assets/img/process_noise_covariance.png" alt="Noise Covariance" width=50% height=auto/>
+                              <p class="card-text">Taking σ<sub>3</sub> to be 20mm, as suggested in the lecture, I now have all 3 covariance values
+                                  needed to generate my noise matrices. 
+                            </p>
+                              <img src="assets/img/kf_noise_matrices.png" alt="Noise Covariance" width=50% height=auto/>
                           </div>
                         </div>
                     
