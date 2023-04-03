@@ -61,7 +61,7 @@
                                 <img src="assets/img/kf_d_m.png" alt="Drag and Momentum equations" width=60% height=auto/>
                                 
                                 In order to find the values of drag and momentum for my robot, I triggered a step response and measured the ToF sensor readings and PWM 
-                                input as the robot moved. I drove the robot at a PWM of 80, since that was the approximate speed it drove during PID in the previous lab. 
+                                input as the robot moved. I drove the robot at a PWM of 120, since that was the approximate speed it drove during PID in the previous lab. 
                                 I then plotted graphs of the position (u), pwm, and velocity (x') of the robot:
                             </p>    
                         </a>
@@ -75,8 +75,7 @@
                         <br><br>
                             <p class="mb-1">
                                 From these graphs, I can determine the steady state velocity, which is the (peak) velocity at which the robot stops accelerating,
-                                and the 90% rise time, which is the time it takes to reach 90% of the steady state velocity. These values are then used to calculate drag and
-                                momentum using the previous equations. 
+                                and the 90% rise time, which is the time it takes to reach 90% of the steady state velocity.
                             </p>    
                         
                             <div class="card border-info mb-3" style="max-width: 20rem;">
@@ -88,13 +87,11 @@
                                   </p>
                               </div>
                             </div>
-                            <br>
                             <p class="mb-1">
-                                Using the above values and the equations for drag and mass, the following calculations are performed. In the drag equation,
+                                Using the above values, drag and mass can next be calculated. In the drag equation,
                                 the value of u is assumed to be 1 in accordance with the lecture. As a result, we get that d = 0.000555, and m = 0.00326. 
                             </p>    
-                            <br>
-                            <div class="card border-danger mb-3" style="max-width: 30rem;">
+                            <div class="card border-danger mb-3" style="max-width: 35rem;">
                               <div class="card-body">
                                 <p class="card-text">
                                     Drag (d) = u / ẋ = 1 / 1800 = 0.000555
@@ -105,7 +102,7 @@
                             </div>
                         <p class="mb-1">
                                 The calculated values for drag and mass are plugged to the A and B matrices from our Kalman filter equations, resulting
-                                in the matrices below. These matrices will next be used along with noise matrices in the Kalman filter code. 
+                                in the matrices below.
                         </p>    
                         <br>
                             <img src="assets/img/a_matrix.png" alt="A Matrix" width=45% height=auto/>
@@ -117,20 +114,12 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Initialize Kalman Filter</h5>
                             </div>
-                            <p class="mb-1"> For this lab, I chose to implement Task A, which is to use PID control to drive my robot towards a wall and
-                               stop it when it reaches exactly 304cm from the wall. The input to the PID controller is the distance readings from the time
-                               of flight sensor, and the output is the new PWM values used to drive the motors. 
-                               <br><br>
-                               Implementing the PID algorithm is simple, but the challenge comes from finding suitable constants for a well-tuned system.
-                              My goal is to drive the car as fast as I can in the beginning while still stopping it short of colliding with the wall with 
-                              as little oscillation as possible. To find the optimal parameters for the PID control system, I used the following heuristic from class: 
-                              <br><br>
-                              1. Set k_p to small value, k_d and k_i to 0.
-                                <br><br>
-                                <p class="text-info">2. Increase k_d until oscillation, then decrease by a factor of 2 to 4. </p>
-                                <p class="text-success">3. Increase k_p until oscillation or overshoot, then decrease by a factor of 2 to 4. </p>
-                                <p class="text-danger">4. Increase k_i until oscillation or overshoot. </p>
-                                
+                            <p class="mb-1"> After measuring my robot's step response, I now have all the data I need to initialize the Kalman filter. This can
+                                be done in 4 steps, as follows:
+                                <p class="text-warning">1. Discretize A and B matrices based on sampling rate. </p>
+                                <p class="text-info">2. Identify C matrix. </p>
+                                <p class="text-success">3. Initialize state vector, x. </p>
+                                <p class="text-danger">4. Specify process noise and sensor noise covariance matrices. </p>
                               </p>
                           </a>
                         </div>
