@@ -122,7 +122,7 @@
                         <br>
     
                         
-                        <div class="card text-white bg-warning mb-3" style="max-width: 50rem;">
+                        <div class="card text-white bg-danger mb-3" style="max-width: 50rem;">
                           <div class="card-header">1. Discretize A and B matrices based on sampling rate</div>
                           <div class="card-body">
                             <p class="card-text">To discretize my A and B matrices, I first determined the sampling rate by finding the average
@@ -145,7 +145,7 @@
                             </p>
                           </div>
                         </div>
-                        <div class="card text-white bg-success mb-3" style="max-width: 50rem;">
+                        <div class="card text-white bg-warning mb-3" style="max-width: 50rem;">
                           <div class="card-header">3. Initialize state vector, x</div>
                           <div class="card-body">
                               <p class="card-text"> <code> x = np.array([[-tof_data[0]],[0]]) </code> </p>
@@ -158,11 +158,11 @@
                                 The process noise matrix, Σ<sub>u</sub>, has two covariance values σ<sub>1</sub> and σ<sub>2</sub>. 
                                 The sensor noise matrix, Σ<sub>z</sub>, has one covariance value σ<sub>3</sub>. 
                             </p>
-                              <img src="assets/img/kf_noise.png" alt="Noise Covariance Matrices" width=50% height=auto/>
+                              <img src="assets/img/kf_noise.png" alt="Noise Covariance Matrices" width=30% height=auto/>
                               <p class="card-text">Using the same sampling rate that I calculated to discretize the A and B matrices, I can calculate
                                   σ<sub>1</sub> and σ<sub>2</sub> with the following equations:
                             </p>
-                              <img src="assets/img/process_noise_covariance.png" alt="Noise Covariance" width=50% height=auto/>
+                              <img src="assets/img/process_noise_covariance.png" alt="Noise Covariance" width=70% height=auto/>
                               <p class="card-text">Taking σ<sub>3</sub> to be 20mm, as suggested in the lecture, I now have all 3 covariance values
                                   needed to generate my noise matrices. 
                             </p>
