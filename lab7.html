@@ -184,17 +184,18 @@
                                   I graphed the generated array of Kalman-filtered data along with the raw TOF sensor readings. With a σ<sub>3</sub>
                                   value of 20, the filtered data appeared very similar to the raw data but slighly higher at some points. 
                                 </p>
-                              <br>
                               <img src="assets/img/kf_20.png" alt="Kalman filter vs Raw data" width=70% height=auto/>
+                        <br><br>
                                 <p> 
                                     With a σ<sub>3</sub> value of 10, the fit was even more exact, making the effect of the Kalman filter unnoticable. 
                                 </p>
-                                <br>
                               <img src="assets/img/kf_10.png" alt="Kalman filter vs Raw data" width=70% height=auto/>
+                        <br><br>
                                 <p> 
                                     Lastly, if I increase σ<sub>3</sub> to 100, placing much greater value on the predicted position data over sensor readings,
                                     the filtered data shifts far away from the raw TOF data, as expected. 
                                 <br>
+                        <br><br>
                               <img src="assets/img/kf_100.png" alt="Kalman filter vs Raw data" width=70% height=auto/>
                            </p>
                         <br>
