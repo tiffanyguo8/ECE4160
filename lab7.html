@@ -179,7 +179,15 @@
                             <p class="mb-1"> 
                                 Using the above parameters, the code to implement the Kalman filter is as follows:
                               </p>
-                              
+                              <script src="https://gist.github.com/tiffanyguo8/29e2fa0a5e31917b90128eb6b128bd93.js"></script>
+                              I graphed the generated array of Kalman-filtered data along with the raw TOF sensor readings. With a σ<sub>3</sub>
+                              value of 20, the filtered data appeared very similar to the raw data but slighly higher at some points. 
+                              <img src="assets/img/kf_20.png" alt="Kalman filter vs Raw data" width=70% height=auto/>
+                              With a σ<sub>3</sub> value of 10, the fit was even more exact, making the effect of the Kalman filter unnoticable. 
+                              <img src="assets/img/kf_10.png" alt="Kalman filter vs Raw data" width=70% height=auto/>
+                              Lastly, if I increase σ<sub>3</sub> to 100, placing much greater value on the predicted position data over sensor readings,
+                              the filtered data shifts far away from the raw TOF data, as expected. 
+                              <img src="assets/img/kf_100.png" alt="Kalman filter vs Raw data" width=70% height=auto/>
                           </a>
                         </div>
                         <br>
