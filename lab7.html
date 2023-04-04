@@ -120,8 +120,6 @@
                           </a>
                         </div>
                         <br>
-    
-                        
                         <div class="card text-white bg-danger mb-3" style="max-width: 50rem;">
                           <div class="card-header">1. Discretize A and B matrices based on sampling rate</div>
                           <div class="card-body">
@@ -176,20 +174,20 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Implement and test Kalman Filter in Jupyter</h5>
                             </div>
-                            <p class="mb-1"> 
+                            <p> 
                                 Using the above parameters, the code to implement the Kalman filter is as follows:
                             </p>
                               <script src="https://gist.github.com/tiffanyguo8/29e2fa0a5e31917b90128eb6b128bd93.js"></script>
-                                <p class="mb-1"> 
+                                <p> 
                                   I graphed the generated array of Kalman-filtered data along with the raw TOF sensor readings. With a σ<sub>3</sub>
                                   value of 20, the filtered data appeared very similar to the raw data but slighly higher at some points. 
                                 </p>
                               <img src="assets/img/kf_20.png" alt="Kalman filter vs Raw data" width=70% height=auto/>
-                                <p class="mb-1"> 
+                                <p> 
                                     With a σ<sub>3</sub> value of 10, the fit was even more exact, making the effect of the Kalman filter unnoticable. 
                                 </p>
                               <img src="assets/img/kf_10.png" alt="Kalman filter vs Raw data" width=70% height=auto/>
-                                <p class="mb-1"> 
+                                <p> 
                                     Lastly, if I increase σ<sub>3</sub> to 100, placing much greater value on the predicted position data over sensor readings,
                                     the filtered data shifts far away from the raw TOF data, as expected. 
                               <img src="assets/img/kf_100.png" alt="Kalman filter vs Raw data" width=70% height=auto/>
