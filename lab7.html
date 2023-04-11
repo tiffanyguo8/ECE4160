@@ -210,8 +210,7 @@
                             <p> 
                                 After verifying that the parameters chosen for the Kalman filter are effective, I simply transfered the Kalman filter logic from 
                                 Python to Arduino code on the Artemis board so that it can perform PID using real-time Kalman filtered data. In my code, which is
-                                inspired by <a href="https://anyafp.github.io/ece4960/labs/lab7/">Anya's</a> code, 
-                                I used the BasicLinearAlgebra Arduino library to help with matrix operations. 
+                                inspired by <a href="https://anyafp.github.io/ece4960/labs/lab7/">Anya's</a> code, I used the BasicLinearAlgebra Arduino library to help with matrix operations. 
                             </p>
                           </a>
                         </div><br>
@@ -219,16 +218,17 @@
                               <p><br>
                                 Here is a video demo of my robot running PID control using the Kalman filter data:
                               </p>
-                        <br><br>
+                        <br>
                                <iframe width="560" height="315" src="https://www.youtube.com/embed/VnqafEW0-fo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         <br><br>      
                         <p>
                                 I found that the parameters used earlier in my Python code worked well for my robot, and playing around with the σ values 
                                   either caused the motors to move unexpectedly/stall or caused the filtered data to be too close to the raw data. Thus, I stuck
-                                  with the parameters I calculated earlier, and the following graphs depict the system working with PID and Kalman filtered data.
+                                  with the parameters I calculated earlier and generated the following graph from my PID run with Kalman filtered data. 
                               </p>
-                        <br>
+                        
                             <img src="assets/img/Kalman_filter_implemented.png" alt="Kalman filter" width=70% height=auto/>
+                        <br>
                         <div class="d-grid gap-2">
                            <a class="btn btn-lg btn-primary" href="index.html">Home</a>
                         </div>
