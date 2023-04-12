@@ -37,75 +37,47 @@
                     <div class="col-lg-8 text-center">
                         <h2> Lab 8: Stunts! </h2>
                         <hr class="divider divider-light" />
-                        <p> In this lab, I first improved my code structure to store chunks of data on the Artemis board and send data only when requested over BLE. 
-                        Next, I drove the robot towards a wall and implemented PID control to stop the robot within 1 foot of the wall. I used the front-facing 
-                            Time of Flight on the robot to collect data which was then used to calculate the error value for the PID controller. </p>
+                        <p> Finally, I will use the Kalman filter from lab 7 to perform a stunt with my robot. </p>
                         
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Position Control</h5>
+                              <h5 class="mb-1">Task A: Position Control</h5>
                             </div>
-                            <p class="mb-1">Before embarking on the main lab task, I first reorganized my code file structure and my system for sending data
-                                from the Artemis board to my laptop over Bluetooth. I broke down my Arduino file into one main file and two .h/.cpp files, one
-                                for motor functions and one for bluetooth commands. The header files below show the functions included in each file:
+                            <p class="mb-1">Since I chose Task A in lab 6, my task for lab 8 is to perform a flip when the robot reaches the black padded area
+                                of the track and then drive in a straight line back to the starting line as fast as possible. In order to have the highest chance of 
+                                for the robot to flip successfully, it must be driven at the fastest possible speed, which in this case is a pwm of 255. 
+                                However, extremely high speeds run the risk of not getting enough raw TOF sensor readings to accurately gauge the distance
+                                of the robot from the wall, so the Kalman filter from lab 7 is incorporated to more accurately predict the robot's real time position.
+                                Below is a code snippet of the relevant code:
                             </p>    
                         </a>
                     </div>
                         <br>
-                            <script src="https://gist.github.com/tiffanyguo8/01cf86b6683713e6339b89afb6931930.js"></script>
-                            <script src="https://gist.github.com/tiffanyguo8/5c7244c81fc015d97b80d1e78e3e4de3.js"></script>
+                            <script src="https://gist.github.com/tiffanyguo8/c337325570e7dd25b30c1a6cfe26dd6d.js"></script>
 
-                            <p class="mb-1">In my main loop, I also added new logic for the storing and transmission of data. Previously, I would send data over Bluetooth
-                            right as I received it, which caused significant delay in my data collection process. My code now stores data in arrays on the 
-                            Artemis board and only sends data when it is requested over Bluetooth. This is done by sending a GET_DATA command in my Python code;
-                            in my Arduino command handler, I set a flag which triggers data to be written to BLE in the main loop. 
+                            <p class="mb-1">At first, instead of doing a flip when the robot reversed its velocity, it would start spinning to the left.
+                                I realized that the speed at which the right and left motors stop spinning and change direction is different, and the 
+                                left motor changes direction more quickly than the right motor, causing the robot to spin instead of flip. I was able
+                                to determine this through recording slo-mo videos of the wheels as the robot changes direction in midair.
                             </p>    
                     <br>
-                            <script src="https://gist.github.com/tiffanyguo8/7d4eaaddc3d1df802f5fcba9b3a0eb5d.js"></script>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/2T9kBMaAXT0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         <br>
                         
-                        <div class="list-group">
-                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                            <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Orientation Control</h5>
-                            </div>
-                            <p class="mb-1"> For this lab, I chose to implement Task A, which is to use PID control to drive my robot towards a wall and
-                               stop it when it reaches exactly 304cm from the wall. The input to the PID controller is the distance readings from the time
-                               of flight sensor, and the output is the new PWM values used to drive the motors. 
-                               <br><br>
-                               Implementing the PID algorithm is simple, but the challenge comes from finding suitable constants for a well-tuned system.
-                              My goal is to drive the car as fast as I can in the beginning while still stopping it short of colliding with the wall with 
-                              as little oscillation as possible. To find the optimal parameters for the PID control system, I used the following heuristic from class: 
-                              <br><br>
-                              1. Set k_p to small value, k_d and k_i to 0.
-                                <br><br>
-                                <p class="text-info">2. Increase k_d until oscillation, then decrease by a factor of 2 to 4. </p>
-                                <p class="text-success">3. Increase k_p until oscillation or overshoot, then decrease by a factor of 2 to 4. </p>
-                                <p class="text-danger">4. Increase k_i until oscillation or overshoot. </p>
-                                
-                              </p>
-                          </a>
-                        </div>
+                        <p class="mb-1">To fix this issue, I included a short delay in my code which drives the car backwards as follows:
+                            </p>    
+                        <br>
+                        
+                        <script src="https://gist.github.com/tiffanyguo8/20bf6acb916af0deeeea84ae886f4740.js"></script>
+                        
+                        <p class="mb-1">This effectively helped both of the motors to switch direction simultaneously. Thanks to this adjustment,
+                            the robot was able to perform a flip as it switched from driving forward to backward rapidly. Here are some videos
+                            of the robot successfully performing a stunt:
+                            </p>    
                         <br>
     
-                        <p class="mb-1"> Using the above heuristic, I calculated the following parameter values which allowed my robot
-                        to quickly move towards the wall but stop before collision, adjusting to be around 304cm from the wall. </p>
-                        <br>
-                         <div class="progress">
-                          <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                         <p class="text-success">k_p = 0.08 </p>
-                        <div class="progress">
-                          <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="text-info">k_d = 0.2 </p>
-                        <div class="progress">
-                          <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="text-danger">k_i = 0.125 </p>
-                        <br>
-                        <script src="https://gist.github.com/tiffanyguo8/c60dd8f5293b7445ac735170cac04837.js"></script>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/Fzm8wWFD8nQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     
                         <p class="mb-1">In my pid function, I added deadband caps so that if the pwm being sent was too low for the motors to actually turn,
                             I simply raised them to the minimum driving pwm. I also capped the maximum pwm value at 255 since that is the maximum duty cycle
