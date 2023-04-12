@@ -63,7 +63,7 @@
                             </p>    
                     <br>
                             <iframe width="560" height="315" src="https://www.youtube.com/embed/2T9kBMaAXT0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        <br>
+                        <br><br>
                         
                         <p class="mb-1">To fix this issue, I included a short delay in my code which drives the car backwards as follows:
                             </p>    
@@ -78,33 +78,12 @@
                         <br>
     
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/Fzm8wWFD8nQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    
-                        <p class="mb-1">In my pid function, I added deadband caps so that if the pwm being sent was too low for the motors to actually turn,
-                            I simply raised them to the minimum driving pwm. I also capped the maximum pwm value at 255 since that is the maximum duty cycle
-                            of the motors. Below is a compilation of videos I took throughout the process of adjusting the PID parameters. I start out by turning
-                            up the P and D terms, then decreasing them and adding the I term so that the robot can stop short of the wall and correct its position. 
+                    <br><br>
+                        <p class="mb-1">Here are some bloopers: 
                             </p>    
-                    
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/Cw2HHaHXPYw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        
-                        <div class="list-group">
-                              <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                                <p class="mb-1">Here are graphs of the time of flight sensor readings and their corresponding pwm outputs over time. The robot starts out
-                                    far away from the wall, so it has high readings for both distance and pwm. As it moves closer to the wall and eventually overshoots
-                                    the 304cm setpoint distance, the pwm dips into the negatives to reverse the car's position and bring it closer to the setpoint.
-                                    <br><br>
-                                    I made the arrays for storing TOF and speed data 1000 ints long, so given that my TOF sensors sample new data roughly 2 times
-                                    per second, my data structure can hold approximately 500 seconds of data, or over 8 minutes. With these structures as well as
-                                    additional arrays I created to store the time and imu readings, my code used 37% of dynamic memory during compilation, meaning
-                                    there is still room for storage of even more data and for longer periods of time if needed. 
-                                </p>    
-                            </a>
-                        </div>
+                    <br>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/6ILWrTp42Cw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         <br>
-                    
-                        <img src="assets/img/pid_distance.png" alt="Distance" width=45% height=auto/>
-                        <img src="assets/img/pid_pwm.png" alt="PWM" width=45% height=auto/>
-                    
                         <div class="d-grid gap-2">
                            <a class="btn btn-lg btn-primary" href="index.html">Home</a>
                         </div>
