@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Tiffany's Lab 9</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap Icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+        <!-- SimpleLightbox plugin CSS-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <link rel=stylesheet href="bootstrap.min.css">
+        <style>
+        body {
+          background-image: url('../assets/img/Grid_paper.webp');
+          background-repeat: no-repeat;
+          background-attachment: fixed; 
+          background-size: cover;
+        }
+        </style>
+    </head>
+    <body id="page-top">
+          
+        <!-- About-->
+        <section class="page-section bg-warning" id="about">
+            <p style="background-image: url('../assets/img/Grid_paper.webp');">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2> Lab 9: Mapping </h2>
+                        <hr class="divider divider-light" />
+                        <p> Finally, I will use the Kalman filter from lab 7 to perform a stunt with my robot. </p>
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Task A: Position Control</h5>
+                            </div>
+                            <p class="mb-1">Since I chose Task A in lab 6, my task for lab 8 is to perform a flip when the robot reaches the black padded area
+                                of the track and then drive in a straight line back to the starting line as fast as possible. In order to have the highest chance of 
+                                for the robot to flip successfully, it must be driven at the fastest possible speed, which in this case is a pwm of 255. 
+                                However, extremely high speeds run the risk of not getting enough raw TOF sensor readings to accurately gauge the distance
+                                of the robot from the wall, so the Kalman filter from lab 7 is incorporated to more accurately predict the robot's real time position.
+                                Below is a code snippet of the relevant code:
+                            </p>    
+                        </a>
+                    </div>
+                        <br>
+                            <script src="https://gist.github.com/tiffanyguo8/c337325570e7dd25b30c1a6cfe26dd6d.js"></script>
+
+                            <p class="mb-1">At first, instead of doing a flip when the robot reversed its velocity, it would start spinning to the left.
+                                I realized that the speed at which the right and left motors stop spinning and change direction is different, and the 
+                                left motor changes direction more quickly than the right motor, causing the robot to spin instead of flip. I was able
+                                to determine this through recording slo-mo videos of the wheels as the robot changes direction in midair.
+                            </p>    
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/2T9kBMaAXT0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <br><br>
+                        
+                        <p class="mb-1">To fix this issue, I included a short delay in my code which drives the car backwards as follows:
+                            </p>                            
+                        <script src="https://gist.github.com/tiffanyguo8/20bf6acb916af0deeeea84ae886f4740.js"></script>
+                        
+                        <p class="mb-1">This effectively helped both of the motors to switch direction simultaneously. Thanks to this adjustment,
+                            the robot was able to perform a flip as it switched from driving forward to backward rapidly. Here are some videos
+                            of the robot successfully performing the stunt and the associated position and pwm graphs:
+                            </p>        
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HBhFwXMHP7w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                        <br><br>
+                        <img src="assets/img/stunt_tof.png" alt="Position vs Time" width=49% height=auto/>
+                        <img src="assets/img/stunt_pwm.png" alt="PWM vs Time" width=49% height=auto/>
+                        <br><br>
+                        <p class="mb-1">The reason there is a 2 second gap in the data is that I used a delay to time when the robot should stop after
+                            performing the flip so that in case my robot goes rogue, it won't have that much time to become an occupational hazard. The data
+                            before the gap is from the sensor readings right up until the flip, and the data afterwards just shows that the robot is
+                            no longer facing the wall and is detecting whatever object is in its way. 
+                            </p><br><br>
+                        <p class="mb-1">Here are some bloopers: 
+                            </p>    
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/6ILWrTp42Cw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <br>
+                        <div class="d-grid gap-2">
+                           <a class="btn btn-lg btn-primary" href="index.html">Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+            
+        <!-- Footer-->
+        <footer class="bg-light py-5">
+            <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2023 - Tiffany &Co</div></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>
