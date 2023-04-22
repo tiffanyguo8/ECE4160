@@ -58,48 +58,58 @@
                         <br>
                             <script src="https://gist.github.com/tiffanyguo8/a93f12395fb563e13aa0d05c016e8d21.js"></script>
                             <iframe width="560" height="315" src="https://www.youtube.com/embed/epDNprMCxwc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                            <br>
+                            <br><br>
                         <p class="mb-1">As you can see in my code, I found the pid error by subtracting the setpoint angular speed from the gyroscope z-axis
                             reading. The Kp and Ki parameters are negative because when the robot starts turning, the pid error is negative, so multiplying
                             it by the k constants outputs a positive speed for my left() function. In the video, the robot takes a moment to ramp up in speed
                             as the error accumulator increases and then rotates at a consistent, slow speed. Since I keep track of both the ToF data and gyroscope
-                            data and send them over to my laptop, the initial slower speed doesn't have any negative effect on my mapping. Below are maps generated
-                            by placing my robot at 5 marked locations in our lab classroom. I also included graphs of the raw ToF and IMU data for reference. 
-                            <br>
+                            data and send them over to my laptop, the initial slower speed doesn't have any negative effect on my mapping. 
+                            
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Mapping</h5>
+                            </div>
+                            <p class="mb-1">In order to map out the entire lab room, I placed my robot at 5 marked locations in our lab classroom and rotated it
+                                using PID control while taking ToF and IMU measurements. Below are the generated maps using polar coordinates and graphss of the raw ToF and IMU data for reference. 
+                            </p>    
+                        </a>    
+                            
+                            <br><br>
                         <img src="assets/img/map03.png" alt="Map" width=49% height=auto/>
                         <img src="assets/img/imu03.png" alt="IMU" width=49% height=auto/>
-                            <br>
+                            <br><br>
                         <img src="assets/img/map53.png" alt="Map" width=49% height=auto/>
                         <img src="assets/img/imu53.png" alt="IMU" width=49% height=auto/>
-                            <br>
+                            <br><br>
                         <img src="assets/img/map00.png" alt="Map" width=49% height=auto/>
                         <img src="assets/img/imu00.png" alt="IMU" width=49% height=auto/>
-                            <br>
+                            <br><br>
                         <img src="assets/img/map-3-2.png" alt="Map" width=49% height=auto/>
                         <img src="assets/img/imu-3-2.png" alt="IMU" width=49% height=auto/>
-                            <br>
+                            <br><br>
                         <img src="assets/img/map5-3.png" alt="Map" width=49% height=auto/>
                         <img src="assets/img/imu5-3.png" alt="IMU" width=49% height=auto/>
-                        <br>
+                        <br><br>
                         <p class="mb-1">After collecting these 5 datasets, I performed some trigonometry operations to convert each point from polar to cartesian 
                             coordinates and rotate and offset it according to the location and orientation where the robot took the readings. Here is the what the final combined
                             map looks like:
                         </p>
                         <br>
                         <img src="assets/img/map_messy.png" alt="IMU" width=70% height=auto/>
-                        <br>
+                        <br><br>
                         <p class="mb-1">I filtered the outlier points for a cleaner map and then traced the walls and boxes detected in the map using lines.
                         </p>
                         <br>
                         <img src="assets/img/map_filtered.png" alt="Map" width=70% height=auto/>
-                        <br>
+                        <br><br>
                         <img src="assets/img/map_lines.png" alt="IMU" width=70% height=auto/>
-                        <br>
+                        <br><br>
                         <p class="mb-1">Looking at the actual setup of the lab room, I think my robot did a good job with mapping!
                         </p>
                         <br>
-                        <img src="assets/img/lab.jpeg" alt="IMU" width=70% height=auto/>
-                        <br>
+                        <img src="assets/img/lab.jpg" alt="Lab" width=70% height=auto/>
+                        <br><br>
                         <p class="mb-1">Here is the code I used to graph the data: 
                         </p>
                         <br>
