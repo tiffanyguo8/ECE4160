@@ -49,12 +49,14 @@
                             <p class="mb-1">Since we want to collect many data points to have more accurate and precise map, I first implemented a
                                 PID control algorithm which rotates the robot at a setpoint of 15 degrees/second. At this angular speed, the robot will
                                 make one full rotation in 24 seconds, and it will collect over 240 data points since the ToF sensors sample at slightly
-                                higher rate than 10 samples per second. 
+                                higher rate than 10 samples per second. The input to the PID controller is the z-axis gyroscope readings, which represents
+                                angular velocity readings. Below is the code I used to implement turning at a set angular velocity and a video of the robot
+                                turning and collecting ToF sensor data:
                             </p>    
                         </a>
                     </div>
                         <br>
-                            <script src="https://gist.github.com/tiffanyguo8/c337325570e7dd25b30c1a6cfe26dd6d.js"></script>
+                            <script src="https://gist.github.com/tiffanyguo8/a93f12395fb563e13aa0d05c016e8d21.js"></script>
 
                             <p class="mb-1">At first, instead of doing a flip when the robot reversed its velocity, it would start spinning to the left.
                                 I realized that the speed at which the right and left motors stop spinning and change direction is different, and the 
