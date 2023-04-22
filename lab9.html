@@ -37,19 +37,19 @@
                     <div class="col-lg-8 text-center">
                         <h2> Lab 9: Mapping </h2>
                         <hr class="divider divider-light" />
-                        <p> Finally, I will use the Kalman filter from lab 7 to perform a stunt with my robot. </p>
+                        <p> In this lab, I will use the Time of Flight sensors and IMU on my robot to map out a static room. This is done by
+                        placing the robot at different known positions around the room and rotating it slowly in place while collecting sensor
+                        readings, similar to how LiDAR works to map its surroundings. </p>
                         
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Task A: Position Control</h5>
+                              <h5 class="mb-1">Angular Velocity Control</h5>
                             </div>
-                            <p class="mb-1">Since I chose Task A in lab 6, my task for lab 8 is to perform a flip when the robot reaches the black padded area
-                                of the track and then drive in a straight line back to the starting line as fast as possible. In order to have the highest chance of 
-                                for the robot to flip successfully, it must be driven at the fastest possible speed, which in this case is a pwm of 255. 
-                                However, extremely high speeds run the risk of not getting enough raw TOF sensor readings to accurately gauge the distance
-                                of the robot from the wall, so the Kalman filter from lab 7 is incorporated to more accurately predict the robot's real time position.
-                                Below is a code snippet of the relevant code:
+                            <p class="mb-1">Since we want to collect many data points to have more accurate and precise map, I first implemented a
+                                PID control algorithm which rotates the robot at a setpoint of 15 degrees/second. At this angular speed, the robot will
+                                make one full rotation in 24 seconds, and it will collect over 240 data points since the ToF sensors sample at slightly
+                                higher rate than 10 samples per second. 
                             </p>    
                         </a>
                     </div>
