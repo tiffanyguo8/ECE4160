@@ -57,36 +57,41 @@
                     </div>
                         <br>
                             <script src="https://gist.github.com/tiffanyguo8/a93f12395fb563e13aa0d05c016e8d21.js"></script>
-
-                            <p class="mb-1">At first, instead of doing a flip when the robot reversed its velocity, it would start spinning to the left.
-                                I realized that the speed at which the right and left motors stop spinning and change direction is different, and the 
-                                left motor changes direction more quickly than the right motor, causing the robot to spin instead of flip. I was able
-                                to determine this through recording slo-mo videos of the wheels as the robot changes direction in midair.
-                            </p>    
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/2T9kBMaAXT0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/epDNprMCxwc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            
+                        <p class="mb-1">As you can see in my code, I found the pid error by subtracting the setpoint angular speed from the gyroscope z-axis
+                            reading. The Kp and Ki parameters are negative because when the robot starts turning, the pid error is negative, so multiplying
+                            it by the k constants outputs a positive speed for my left() function. In the video, the robot takes a moment to ramp up in speed
+                            as the error accumulator increases and then rotates at a consistent, slow speed. Since I keep track of both the ToF data and gyroscope
+                            data and send them over to my laptop, the initial slower speed doesn't have any negative effect on my mapping. Below are maps generated
+                            by placing my robot at 5 marked locations in our lab classroom. I also included graphs of the raw ToF and IMU data for reference. 
+                            
+                        <img src="assets/img/map03.png" alt="Map" width=49% height=auto/>
+                        <img src="assets/img/imu03.png" alt="IMU" width=49% height=auto/>
+                        <img src="assets/img/map53.png" alt="Map" width=49% height=auto/>
+                        <img src="assets/img/imu53.png" alt="IMU" width=49% height=auto/>
+                        <img src="assets/img/map00.png" alt="Map" width=49% height=auto/>
+                        <img src="assets/img/imu00.png" alt="IMU" width=49% height=auto/>
+                        <img src="assets/img/map-3-2.png" alt="Map" width=49% height=auto/>
+                        <img src="assets/img/imu-3-2.png" alt="IMU" width=49% height=auto/>
+                        <img src="assets/img/map5-3.png" alt="Map" width=49% height=auto/>
+                        <img src="assets/img/imu5-3.png" alt="IMU" width=49% height=auto/>
                         <br><br>
-                        
-                        <p class="mb-1">To fix this issue, I included a short delay in my code which drives the car backwards as follows:
-                            </p>                            
-                        <script src="https://gist.github.com/tiffanyguo8/20bf6acb916af0deeeea84ae886f4740.js"></script>
-                        
-                        <p class="mb-1">This effectively helped both of the motors to switch direction simultaneously. Thanks to this adjustment,
-                            the robot was able to perform a flip as it switched from driving forward to backward rapidly. Here are some videos
-                            of the robot successfully performing the stunt and the associated position and pwm graphs:
-                            </p>        
-<iframe width="560" height="315" src="https://www.youtube.com/embed/HBhFwXMHP7w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                        <br><br>
-                        <img src="assets/img/stunt_tof.png" alt="Position vs Time" width=49% height=auto/>
-                        <img src="assets/img/stunt_pwm.png" alt="PWM vs Time" width=49% height=auto/>
-                        <br><br>
-                        <p class="mb-1">The reason there is a 2 second gap in the data is that I used a delay to time when the robot should stop after
-                            performing the flip so that in case my robot goes rogue, it won't have that much time to become an occupational hazard. The data
-                            before the gap is from the sensor readings right up until the flip, and the data afterwards just shows that the robot is
-                            no longer facing the wall and is detecting whatever object is in its way. 
-                            </p><br><br>
-                        <p class="mb-1">Here are some bloopers: 
-                            </p>    
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/6ILWrTp42Cw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <p class="mb-1">After collecting these 5 datasets, I performed some matrix operations to convert each point from polar to cartesian 
+                            coordinates and rotate and offset it according to the location where the robot took the readings. Here is the what the final combined
+                            map looks like:
+                        </p>
+                        <img src="assets/img/map_messy.png" alt="IMU" width=70% height=auto/>
                         <br>
+                        <p class="mb-1">I filtered the outlier points for a cleaner map and then traced the walls and boxes detected in the map using lines.
+                        </p>
+                        <img src="assets/img/map_filtered.png" alt="Map" width=70% height=auto/>
+                        <img src="assets/img/map_lines.png" alt="IMU" width=70% height=auto/>
+                        <br>
+                        <p class="mb-1">Here is the code I used to graph the data: 
+                        </p>
+                        <script src="https://gist.github.com/tiffanyguo8/232fa88f919b2c20a1ed59b7c0db5d6c.js"></script>
+                        <br><br>
                         <div class="d-grid gap-2">
                            <a class="btn btn-lg btn-primary" href="index.html">Home</a>
                         </div>
