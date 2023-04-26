@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Tiffany's Lab 10</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap Icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+        <!-- SimpleLightbox plugin CSS-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <link rel=stylesheet href="bootstrap.min.css">
+        <style>
+        body {
+          background-image: url('../assets/img/Grid_paper.webp');
+          background-repeat: no-repeat;
+          background-attachment: fixed; 
+          background-size: cover;
+        }
+        </style>
+    </head>
+    <body id="page-top">
+          
+        <!-- About-->
+        <section class="page-section bg-warning" id="about">
+            <p style="background-image: url('../assets/img/Grid_paper.webp');">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2> Lab 10: Grid Localization using Bayes Filter </h2>
+                        <hr class="divider divider-light" />
+                        <p> In this lab, I will use the Time of Flight sensors and IMU on my robot to map out a static room. This is done by
+                        placing the robot at different known positions around the room and rotating it slowly in place while collecting sensor
+                        readings, similar to how LiDAR works to map its surroundings. </p>
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Angular Velocity Control</h5>
+                            </div>
+                            <p class="mb-1">Since we want to collect many data points to have more accurate and precise map, I first implemented a
+                                PID control algorithm which rotates the robot at a setpoint of 15 degrees/second. At this angular speed, the robot will
+                                make one full rotation in 24 seconds, and it will collect over 240 data points since the ToF sensors sample at slightly
+                                higher rate than 10 samples per second. The input to the PID controller is the z-axis gyroscope readings, which represents
+                                angular velocity readings. Below is the code I used to implement turning at a set angular velocity and a video of the robot
+                                turning and collecting ToF sensor data:
+                            </p>    
+                        </a>
+                    </div>
+                        <br>
+                            <script src="https://gist.github.com/tiffanyguo8/a93f12395fb563e13aa0d05c016e8d21.js"></script>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/epDNprMCxwc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <br><br>
+                        <p class="mb-1">As you can see in my code, I found the pid error by subtracting the setpoint angular speed from the gyroscope z-axis
+                            reading. The Kp and Ki parameters are negative because when the robot starts turning, the pid error is negative, so multiplying
+                            it by the k constants outputs a positive speed for my left() function. In the video, the robot takes a moment to ramp up in speed
+                            as the error accumulator increases and then rotates at a consistent, slow speed. Since I keep track of both the ToF data and gyroscope
+                            data and send them over to my laptop, the initial slower speed doesn't have any negative effect on my mapping. 
+                            
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Mapping</h5>
+                            </div>
+                            <p class="mb-1">In order to map out the entire lab room, I placed my robot at 5 marked locations in our lab classroom and rotated it
+                                using PID control while taking ToF and IMU measurements. Below are the generated maps using polar coordinates and graphss of the raw ToF and IMU data for reference. 
+                            </p>    
+                        </a>    
+                        </div>       
+                            <br><br>
+                        <img src="assets/img/map03.png" alt="Map" width=49% height=auto/>
+                        <img src="assets/img/imu03.png" alt="IMU" width=49% height=auto/>
+                            <br><br>
+                        <img src="assets/img/map53.png" alt="Map" width=49% height=auto/>
+                        <img src="assets/img/imu53.png" alt="IMU" width=49% height=auto/>
+                            <br><br>
+                        <img src="assets/img/map00.png" alt="Map" width=49% height=auto/>
+                        <img src="assets/img/imu00.png" alt="IMU" width=49% height=auto/>
+                            <br><br>
+                        <img src="assets/img/map-3-2.png" alt="Map" width=49% height=auto/>
+                        <img src="assets/img/imu-3-2.png" alt="IMU" width=49% height=auto/>
+                            <br><br>
+                        <img src="assets/img/map5-3.png" alt="Map" width=49% height=auto/>
+                        <img src="assets/img/imu5-3.png" alt="IMU" width=49% height=auto/>
+                        <br><br>
+                        <p class="mb-1">After collecting these 5 datasets, I performed some trigonometry operations to convert each point from polar to cartesian 
+                            coordinates and rotate and offset it according to the location and orientation where the robot took the readings. Here is the what the final combined
+                            map looks like:
+                        </p>
+                        <br>
+                        <img src="assets/img/map_messy.png" alt="IMU" width=70% height=auto/>
+                        <br><br>
+                        <p class="mb-1">I filtered the outlier points for a cleaner map and then traced the walls and boxes detected in the map using lines.
+                        </p>
+                        <br>
+                        <img src="assets/img/map_filtered.png" alt="Map" width=70% height=auto/>
+                        <br><br>
+                        <img src="assets/img/map_lines.png" alt="IMU" width=70% height=auto/>
+                        <br><br>
+                        <p class="mb-1">Looking at the actual setup of the lab room, I think my robot did a good job with mapping!
+                        </p>
+                        <br>
+                        <img src="assets/img/lab.jpg" alt="Lab" width=70% height=auto/>
+                        <br><br>
+                        <p class="mb-1">Here is the code I used to graph the data: 
+                        </p>
+                        <br>
+                        <script src="https://gist.github.com/tiffanyguo8/232fa88f919b2c20a1ed59b7c0db5d6c.js"></script>
+                        <br>
+                        <div class="d-grid gap-2">
+                           <a class="btn btn-lg btn-primary" href="index.html">Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+            
+        <!-- Footer-->
+        <footer class="bg-light py-5">
+            <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2023 - Tiffany &Co</div></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>
