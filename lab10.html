@@ -119,9 +119,12 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Update Step</h5>
                             </div>
-                            <p class="mb-1">In order to map out the entire lab room, I placed my robot at 5 marked locations in our lab classroom and rotated it
-                                using PID control while taking ToF and IMU measurements. Below are the generated maps using polar coordinates and graphss of the raw ToF and IMU data for reference. 
-                            </p>    
+                            <p class="mb-1">In the update step, the belief that the robot is in each state is calculated given all past measurements
+                                and control inputs. I iterate through each potential current position and multiply each state's belief by the probability
+                                of obtaining the current sensor readings given the said position. The belief value for each pose is updated accordingly 
+                                and normalized so that the total probability is 1. 
+                            </p>  
+                              <script src="https://gist.github.com/tiffanyguo8/30dca0ccbc9310513cf4ae77323d6844.js"></script>
                         </a>    
                         </div> 
                         
