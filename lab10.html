@@ -48,34 +48,26 @@
                                 odometry and sensor data. This is done in two steps: First, the prediction step calculates the predicted state
                                 distribution given the current state and odometry input. Next, in the update step, sensor measurements are incorporated
                                 into the system by calculating the likelihood of said measurements given each state. The combination of the prediction 
-                                and update steps outputs the posterior state distribution and thus the most probable state of the robot. 
+                                and update steps outputs the posterior state distribution and thus the most probable state of the robot. The algorithm
+                                is broken down into the four sections below for simplicity of implementation. I referred to Anya Prabowo's website
+                                for the Python code used in this lab. 
                             </p>    
+                              <img src="assets/img/Bayes_filter.png" alt="Bayes Filter" width=70% height=auto/>
                         </a>
                     </div>
-                        <br>
-                            <script src="https://gist.github.com/tiffanyguo8/a93f12395fb563e13aa0d05c016e8d21.js"></script>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/epDNprMCxwc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                            <br><br>
-                        <p class="mb-1">As you can see in my code, I found the pid error by subtracting the setpoint angular speed from the gyroscope z-axis
-                            reading. The Kp and Ki parameters are negative because when the robot starts turning, the pid error is negative, so multiplying
-                            it by the k constants outputs a positive speed for my left() function. In the video, the robot takes a moment to ramp up in speed
-                            as the error accumulator increases and then rotates at a consistent, slow speed. Since I keep track of both the ToF data and gyroscope
-                            data and send them over to my laptop, the initial slower speed doesn't have any negative effect on my mapping. 
-                            
+                        <br><br>
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Compute Control</h5>
                             </div>
-                            <p class="mb-1">In order to map out the entire lab room, I placed my robot at 5 marked locations in our lab classroom and rotated it
-                                using PID control while taking ToF and IMU measurements. Below are the generated maps using polar coordinates and graphss of the raw ToF and IMU data for reference. 
+                              <p class="mb-1">The <code> compute_control </code> function takes the robot's current and previous positions as input
+                                  and outputs u, which represents the control input in the Bayes filter algorithm. 
                             </p>    
+                              <script src="https://gist.github.com/tiffanyguo8/7444f92072ca7e86b7335dea432b810e.js"></script>
                         </a>    
                         </div>       
                             <br><br>
-                        <img src="assets/img/map03.png" alt="Map" width=49% height=auto/>
-                        <img src="assets/img/imu03.png" alt="IMU" width=49% height=auto/>
-                        
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
