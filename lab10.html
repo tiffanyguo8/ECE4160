@@ -105,10 +105,12 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Sensor Model</h5>
                             </div>
-                            <p class="mb-1">In order to map out the entire lab room, I placed my robot at 5 marked locations in our lab classroom and rotated it
-                                using PID control while taking ToF and IMU measurements. Below are the generated maps using polar coordinates and graphss of the raw ToF and IMU data for reference. 
+                            <p class="mb-1">The sensor_model() function calculates the probability of obtaining certain sensor readings given the state of the robot. 
+                                It does this by calculating a Gaussian using the true observation (since this is a simulation, we know what the robot should sense) as
+                                the mean and sensor_sigma as the standard deviation. The function returns an array of the calculated results for the measurement,
+                                which consists of 18 data points. 
                             </p>    
-                              <script src="https://gist.github.com/tiffanyguo8/0528605d476824c42f5ac619d5d68eaa.js"></script>
+                              <script src="https://gist.github.com/tiffanyguo8/8fe2b7109eee03bc5b7cbc42ab6be5da.js"></script>
                         </a>    
                         </div> 
                             <br>
