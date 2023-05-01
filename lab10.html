@@ -44,12 +44,11 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Bayes Filter</h5>
                             </div>
-                            <p class="mb-1">Since we want to collect many data points to have more accurate and precise map, I first implemented a
-                                PID control algorithm which rotates the robot at a setpoint of 15 degrees/second. At this angular speed, the robot will
-                                make one full rotation in 24 seconds, and it will collect over 240 data points since the ToF sensors sample at slightly
-                                higher rate than 10 samples per second. The input to the PID controller is the z-axis gyroscope readings, which represents
-                                angular velocity readings. Below is the code I used to implement turning at a set angular velocity and a video of the robot
-                                turning and collecting ToF sensor data:
+                            <p class="mb-1">The Bayes filter estimates the state of the robot based on the prior belief about the state along with
+                                odometry and sensor data. This is done in two steps: First, the prediction step calculates the predicted state
+                                distribution given the current state and odometry input. Next, in the update step, sensor measurements are incorporated
+                                into the system by calculating the likelihood of said measurements given each state. The combination of the prediction 
+                                and update steps outputs the posterior state distribution and thus the most probable state of the robot. 
                             </p>    
                         </a>
                     </div>
