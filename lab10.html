@@ -52,18 +52,20 @@
                                 is broken down into the four sections below for simplicity of implementation. I referred to Anya Prabowo's website
                                 for the Python code used in this lab. 
                             </p>    
-                              <img src="assets/img/Bayes_filter.png" alt="Bayes Filter" width=70% height=auto/>
+                              <img src="assets/img/Bayes_filter.png" alt="Bayes Filter" width=90% height=auto/>
                         </a>
                     </div>
-                        <br><br>
+                        <br>
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Compute Control</h5>
                             </div>
-                              <p class="mb-1">The <code> compute_control </code> function takes the robot's current and previous positions as input
-                                  and outputs u, which represents the control input in the Bayes filter algorithm. 
-                            </p>    
+                              <p class="mb-1">The <code> compute_control() </code> function takes the robot's current and previous positions as input
+                                  and outputs u, which represents the control input in the Bayes filter algorithm. u is a tuple that consists of
+                                  the rotation 1, translation, and rotation 2 components which can be calculated using the equations below from class:
+                            </p>   
+                               <img src="assets/img/compute_control.png" alt="Bayes Filter" width=90% height=auto/>
                               <script src="https://gist.github.com/tiffanyguo8/7444f92072ca7e86b7335dea432b810e.js"></script>
                         </a>    
                         </div>       
@@ -73,9 +75,13 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Odometry Motion Model</h5>
                             </div>
-                            <p class="mb-1">In order to map out the entire lab room, I placed my robot at 5 marked locations in our lab classroom and rotated it
-                                using PID control while taking ToF and IMU measurements. Below are the generated maps using polar coordinates and graphss of the raw ToF and IMU data for reference. 
-                            </p>    
+                            <p class="mb-1">The <code> odometry_motion_model() </code> function calculates the state transition probability, which is the likelihood
+                                that the robot is in the curr_pose given the prev_pose and control input u. The equation for transition probability is given below as
+                                the product of three gaussians, each of which takes mu, x, and sigma values and outputs the relative likelihood of x being in a Normal Distribution 
+                                with mean mu and standard deviation sigma.
+                            </p>
+                              <img src="assets/img/compute_control.png" alt="Bayes Filter" width=90% height=auto/>
+                              <script src="https://gist.github.com/tiffanyguo8/264d2fe72a352cf3e48a0da10544fd8c.js"></script>
                         </a>    
                         </div>    
                         
