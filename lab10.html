@@ -37,14 +37,12 @@
                     <div class="col-lg-8 text-center">
                         <h2> Lab 10: Grid Localization using Bayes Filter </h2>
                         <hr class="divider divider-light" />
-                        <p> In this lab, I will use the Time of Flight sensors and IMU on my robot to map out a static room. This is done by
-                        placing the robot at different known positions around the room and rotating it slowly in place while collecting sensor
-                        readings, similar to how LiDAR works to map its surroundings. </p>
+                        <p> In this lab, I will simulate grid localization using Bayes filter to visualize localization on my robot. </p>
                         
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Angular Velocity Control</h5>
+                              <h5 class="mb-1">Bayes Filter</h5>
                             </div>
                             <p class="mb-1">Since we want to collect many data points to have more accurate and precise map, I first implemented a
                                 PID control algorithm which rotates the robot at a setpoint of 15 degrees/second. At this angular speed, the robot will
@@ -68,7 +66,7 @@
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Mapping</h5>
+                              <h5 class="mb-1">Compute Control</h5>
                             </div>
                             <p class="mb-1">In order to map out the entire lab room, I placed my robot at 5 marked locations in our lab classroom and rotated it
                                 using PID control while taking ToF and IMU measurements. Below are the generated maps using polar coordinates and graphss of the raw ToF and IMU data for reference. 
@@ -78,46 +76,40 @@
                             <br><br>
                         <img src="assets/img/map03.png" alt="Map" width=49% height=auto/>
                         <img src="assets/img/imu03.png" alt="IMU" width=49% height=auto/>
-                            <br><br>
-                        <img src="assets/img/map53.png" alt="Map" width=49% height=auto/>
-                        <img src="assets/img/imu53.png" alt="IMU" width=49% height=auto/>
-                            <br><br>
-                        <img src="assets/img/map00.png" alt="Map" width=49% height=auto/>
-                        <img src="assets/img/imu00.png" alt="IMU" width=49% height=auto/>
-                            <br><br>
-                        <img src="assets/img/map-3-2.png" alt="Map" width=49% height=auto/>
-                        <img src="assets/img/imu-3-2.png" alt="IMU" width=49% height=auto/>
-                            <br><br>
-                        <img src="assets/img/map5-3.png" alt="Map" width=49% height=auto/>
-                        <img src="assets/img/imu5-3.png" alt="IMU" width=49% height=auto/>
-                        <br><br>
-                        <p class="mb-1">After collecting these 5 datasets, I performed some trigonometry operations to convert each point from polar to cartesian 
-                            coordinates and rotate and offset it according to the location and orientation where the robot took the readings. Here is the what the final combined
-                            map looks like:
-                        </p>
-                        <br>
-                        <img src="assets/img/map_messy.png" alt="IMU" width=70% height=auto/>
-                        <br><br>
-                        <p class="mb-1">I filtered the outlier points for a cleaner map and then traced the walls and boxes detected in the map using lines.
-                        </p>
-                        <br>
-                        <img src="assets/img/map_filtered.png" alt="Map" width=70% height=auto/>
-                        <br><br>
-                        <img src="assets/img/map_lines.png" alt="IMU" width=70% height=auto/>
-                        <br><br>
-                        <p class="mb-1">Looking at the actual setup of the lab room, I think my robot did a good job with mapping!
-                        </p>
-                        <br>
-                        <img src="assets/img/lab.jpg" alt="Lab" width=70% height=auto/>
-                        <br><br>
-                        <p class="mb-1">Here is the code I used to graph the data: 
-                        </p>
-                        <br>
-                        <script src="https://gist.github.com/tiffanyguo8/232fa88f919b2c20a1ed59b7c0db5d6c.js"></script>
-                        <br>
-                        <div class="d-grid gap-2">
-                           <a class="btn btn-lg btn-primary" href="index.html">Home</a>
-                        </div>
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Odometry Motion Model</h5>
+                            </div>
+                            <p class="mb-1">In order to map out the entire lab room, I placed my robot at 5 marked locations in our lab classroom and rotated it
+                                using PID control while taking ToF and IMU measurements. Below are the generated maps using polar coordinates and graphss of the raw ToF and IMU data for reference. 
+                            </p>    
+                        </a>    
+                        </div>    
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Sensor Model</h5>
+                            </div>
+                            <p class="mb-1">In order to map out the entire lab room, I placed my robot at 5 marked locations in our lab classroom and rotated it
+                                using PID control while taking ToF and IMU measurements. Below are the generated maps using polar coordinates and graphss of the raw ToF and IMU data for reference. 
+                            </p>    
+                        </a>    
+                        </div> 
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Update Step</h5>
+                            </div>
+                            <p class="mb-1">In order to map out the entire lab room, I placed my robot at 5 marked locations in our lab classroom and rotated it
+                                using PID control while taking ToF and IMU measurements. Below are the generated maps using polar coordinates and graphss of the raw ToF and IMU data for reference. 
+                            </p>    
+                        </a>    
+                        </div> 
+                        
                     </div>
                 </div>
             </div>
