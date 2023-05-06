@@ -51,24 +51,24 @@
                             to drive our physical robot. The optimized code utilizes precaching, vector processing, and other programming practices
                             which significantly speed up the calculation time. To test this code out, I ran the simulation once again and made sure
                             it yielded the expected results. Below is the output of the simulation, where The green line shows the robot's actual ground 
-                            truth position, the red line is 
-                                estimation based on odometry/sensor values, and the blue line is the Bayes filter estimation of the position. 
+                            truth position, the red line is estimation based on odometry/sensor values, and the blue line is the Bayes filter estimation of the position. 
                             </p>    
-                              <img src="assets/img/Bayes_filter.png" alt="Bayes Filter" width=90% height=auto/>
+                              <img src="assets/img/simulation_lab11.png" alt="Simulation" width=90% height=auto/>
                         </a>
                     </div>
                         <br>
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Compute Control</h5>
+                              <h5 class="mb-1">Code Implementation</h5>
                             </div>
-                              <p class="mb-1">The <code> compute_control() </code> function takes the robot's current and previous positions as input
-                                  and outputs u, which represents the control input in the Bayes filter algorithm. u is a tuple that consists of
-                                  the rotation 1, translation, and rotation 2 components which can be calculated using the equations below from class:
+                              <p class="mb-1">Before we can run the simulation code on the real robot, we have to implement the <code> perform_observation_loop() </code> 
+                                  function of class RealRobot in lab11_real.ipynb. This code allows the robot to rotate at a uniform angular speed of 15 degrees
+                                  per second and collect 18 evenly spaced time of flight sensor readings each 20 degrees apart. This array of 18 data points 
+                                  is then passed into the optimized localization program to provide the final estimation of the robot's location. Here is the code
+                                  I used to implement this functionality:
                             </p>   
-                               <img src="assets/img/compute_control.png" alt="Bayes Filter" width=50% height=auto/>
-                              <script src="https://gist.github.com/tiffanyguo8/7444f92072ca7e86b7335dea432b810e.js"></script>
+                               <script src="https://gist.github.com/tiffanyguo8/e48696610f5718a8a0268bb5567e2ebe.js"></script>
                         </a>    
                         </div>       
                             <br>
