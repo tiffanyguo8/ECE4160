@@ -37,20 +37,22 @@
                     <div class="col-lg-8 text-center">
                         <h2> Lab 11: Localization on the Real Robot </h2>
                         <hr class="divider divider-light" />
-                        <p> In this lab, I will simulate grid localization using Bayes filter to visualize localization on my robot. </p>
+                        <p> In this lab, I will bring the simulation from Lab 10 to life by performing
+                        grid localization using Bayes filter on data from my real robot. I will place the robot at different points around the map
+                        and see how well it can localize its location using odometry and time of flight sensor data. </p>
                         
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Bayes Filter</h5>
+                              <h5 class="mb-1">Test New Localization Simulation</h5>
                             </div>
-                            <p class="mb-1">The Bayes filter estimates the state of the robot based on the prior belief about the state along with
-                                odometry and sensor data. This is done in two steps: First, the prediction step calculates the predicted state
-                                distribution given the current state and odometry input. Next, in the update step, sensor measurements are incorporated
-                                into the system by calculating the likelihood of said measurements given each state. The combination of the prediction 
-                                and update steps outputs the posterior state distribution and thus the most probable state of the robot. The algorithm
-                                is broken down into the five sections below for simplicity of implementation. I referred to Anya Prabowo's website
-                                for the Python code used in this lab. 
+                            <p class="mb-1">In Lab 10, we wrote the localization code by ourself to learn the processes, filters, and models used
+                            to localize a mobile robot. In the current lab, we are provided with an optimized implementation which we will modify
+                            to drive our physical robot. The optimized code utilizes precaching, vector processing, and other programming practices
+                            which significantly speed up the calculation time. To test this code out, I ran the simulation once again and made sure
+                            it yielded the expected results. Below is the output of the simulation, where The green line shows the robot's actual ground 
+                            truth position, the red line is 
+                                estimation based on odometry/sensor values, and the blue line is the Bayes filter estimation of the position. 
                             </p>    
                               <img src="assets/img/Bayes_filter.png" alt="Bayes Filter" width=90% height=auto/>
                         </a>
@@ -142,6 +144,10 @@
                          <iframe width="560" height="315" src="https://www.youtube.com/embed/fG0snO9WOvQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/YnliROMX9lk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>      
                         <script src="https://gist.github.com/tiffanyguo8/2f85c475fa6ea2e056f0db1a464e38a3.js"></script>
+                        <br>
+                        <div class="d-grid gap-2">
+                           <a class="btn btn-lg btn-primary" href="index.html">Home</a>
+                        </div>
                     </div>
                 </div>
             </div>
