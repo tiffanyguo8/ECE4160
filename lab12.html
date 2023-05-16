@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Tiffany's Lab 12</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap Icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+        <!-- SimpleLightbox plugin CSS-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <link rel=stylesheet href="bootstrap.min.css">
+        <style>
+        body {
+          background-image: url('../assets/img/Grid_paper.webp');
+          background-repeat: no-repeat;
+          background-attachment: fixed; 
+          background-size: cover;
+        }
+        </style>
+    </head>
+    <body id="page-top">
+          
+        <!-- About-->
+        <section class="page-section bg-warning" id="about">
+            <p style="background-image: url('../assets/img/Grid_paper.webp');">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2> Lab 12: Path Planning and Execution </h2>
+                        <hr class="divider divider-light" />
+                        <p> In this lab, I will bring the simulation from Lab 10 to life by performing
+                        grid localization using Bayes filter on data from my real robot. I will place the robot at different points around the map
+                        and see how well it can localize its location using odometry and time of flight sensor data. </p>
+                        
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Test New Localization Simulation</h5>
+                            </div>
+                            <p class="mb-1">In Lab 10, we wrote the localization code by ourself to learn the processes, filters, and models used
+                            to localize a mobile robot. In the current lab, we are provided with an optimized implementation which we will modify
+                            to drive our physical robot. The optimized code utilizes precaching, vector processing, and other programming practices
+                            which significantly speed up the calculation time. To test this code out, I ran the simulation once again and made sure
+                            it yielded the expected results. Below is the output of the simulation, where The green line shows the robot's actual ground 
+                            truth position, the red line is estimation based on odometry/sensor values, and the blue line is the Bayes filter estimation of the position. 
+                            </p>    
+                              <img src="assets/img/simulation_lab11.png" alt="Simulation" width=90% height=auto/>
+                        </a>
+                    </div>
+                        <br>
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Code Implementation</h5>
+                            </div>
+                              <p class="mb-1">Before we can run the simulation code on the real robot, we have to implement the <code> perform_observation_loop() </code> 
+                                  function of class RealRobot in lab11_real.ipynb. This code allows the robot to rotate at a uniform angular speed of 15 degrees
+                                  per second and collect 18 evenly spaced time of flight sensor readings each 20 degrees apart. This array of 18 data points 
+                                  is then passed into the optimized localization program to provide the final estimation of the robot's location. Here is the code
+                                  I used to implement this functionality:
+                            </p>   
+                               <script src="https://gist.github.com/tiffanyguo8/e48696610f5718a8a0268bb5567e2ebe.js"></script>
+                        </a>    
+                        </div>       
+                            <br>
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Odometry Motion Model</h5>
+                            </div>
+                            <p class="mb-1">The <code> odom_motion_model() </code> function calculates the state transition probability, which is the likelihood
+                                that the robot is in the curr_pose given the prev_pose and control input u. The equation for transition probability is given below as
+                                the product of three gaussians, each of which takes mu, x, and sigma values and outputs the relative likelihood of x being in a Normal Distribution 
+                                with mean mu and standard deviation sigma.
+                            </p>
+                              <img src="assets/img/odometry_motion_model.png" alt="Odometry Motion Model" width=70% height=auto/>
+                              <script src="https://gist.github.com/tiffanyguo8/264d2fe72a352cf3e48a0da10544fd8c.js"></script>
+                        </a>    
+                        </div>    
+                            <br>
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Prediction Step</h5>
+                            </div>
+                            <p class="mb-1">This step updates the bel_bar probability based on the cur_odom and prev_odom inputs. First, the control
+                                input is updated by calling compute_control(). Next, I loop through the previous and current states and call 
+                                odom_motion_model() to calculate the probability of being in each state. I then multiplied the probability of each state
+                                by the previous belief at that state and normalized the distribution so sum to 1. If the previous belief for any state
+                                is under a threshold of 0.0001, the calculations for that state are negligable and thus skipped to increase efficiency. 
+                            </p>    
+                              <script src="https://gist.github.com/tiffanyguo8/0528605d476824c42f5ac619d5d68eaa.js"></script>
+                        </a>    
+                        </div> 
+                            <br>
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Sensor Model</h5>
+                            </div>
+                              <p class="mb-1">The <code> sensor_model() </code> function calculates the probability of obtaining certain sensor readings given the state of the robot. 
+                                It does this by calculating a Gaussian using the true observation (since this is a simulation, we know what the robot should sense) as
+                                the mean and sensor_sigma as the standard deviation. The function returns an array of the calculated results for the measurement,
+                                which consists of 18 data points. 
+                            </p>    
+                              <script src="https://gist.github.com/tiffanyguo8/8fe2b7109eee03bc5b7cbc42ab6be5da.js"></script>
+                        </a>    
+                        </div> 
+                            <br>
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Update Step</h5>
+                            </div>
+                            <p class="mb-1">In the update step, the belief that the robot is in each state is calculated given all past measurements
+                                and control inputs. I iterate through each potential current position and multiply each state's belief by the probability
+                                of obtaining the current sensor readings given the said position. The belief value for each pose is updated accordingly 
+                                and normalized so that the total probability is 1. 
+                            </p>  
+                              <script src="https://gist.github.com/tiffanyguo8/30dca0ccbc9310513cf4ae77323d6844.js"></script>
+                        </a>    
+                        </div> 
+                            <br>
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h5 class="mb-1">Simulation</h5>
+                            </div>
+                            <p class="mb-1">Here are the simulations of the robot's localization while moving in a predetermined trajectory
+                                and the corresponding output. The green line shows the robot's actual ground truth position, the red line is 
+                                estimation based on odometry/sensor values, and the blue line is the Bayes filter estimation of the position.  
+                            </p>  
+                        </a>    
+                        </div> 
+                         <iframe width="560" height="315" src="https://www.youtube.com/embed/fG0snO9WOvQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/YnliROMX9lk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>      
+                        <script src="https://gist.github.com/tiffanyguo8/2f85c475fa6ea2e056f0db1a464e38a3.js"></script>
+                        <br>
+                        <div class="d-grid gap-2">
+                           <a class="btn btn-lg btn-primary" href="index.html">Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+            
+        <!-- Footer-->
+        <footer class="bg-light py-5">
+            <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2023 - Tiffany &Co</div></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>
