@@ -83,18 +83,47 @@
                               <p> (0,0) <br>
                               <img src="assets/img/lab11/localization_00_green.png" alt="Localization" width=49% height=auto/>
                               <img src="assets/img/lab11/localization_00_blue.png" alt="Localization" width=49% height=auto/>
+                                  <br>
+                              Although this pose is not one of the 4 included in the lab, my localization result matched perfectly with the ground truth,
+                                  so I had to include it :)
                               </p>
                               <p> (-3,-2) and (0,3) <br>
                               <img src="assets/img/lab11/localization_-3-2.png" alt="Localization" width=49% height=auto/>
                               <img src="assets/img/lab11/localization_03.png" alt="Localization" width=49% height=auto/>
+                                  <br>
+                              I was also able to get pretty good results for the above two points after many tries. The green dot represents the ground truth position,
+                                  and the blue dot is the localization result. 
                               </p>
                               <p> (5,3) <br>
                               <img src="assets/img/lab11/localization_53.png" alt="Localization" width=49% height=auto/>
                               <img src="assets/img/lab11/localization_53_2.png" alt="Localization" width=49% height=auto/>
+                                  <br>
+                              This point was harder to localize, and I was able to get mixed results after many tries. However, there were many runs
+                                  where I successfully collected and constructed a polar plot of the 18 sensor data points just to have the localization
+                                  process return a completely wrong prediction with high confidence. One change that helped the localization process to 
+                                  return the correct prediction was to manually remove some data points which should be farther away but somehow recorded
+                                  to be much closer to the robot due to faulty ToF sensor readings. After making these points appear farther away as expectd,
+                                  the localization performed better. 
                               </p>
                               <p> (5,-3) <br>
                               <img src="assets/img/lab11/localization_5-3.png" alt="Localization" width=49% height=auto/>
+                                  <br>
+                              Lastly, it was very difficult for me to localize this point. After many attempts, the localization process kept mistaking
+                                  (5,-3) for a similar point farther to the left. Since both points have a wall to the right and bottom sides and are more
+                                  open on the other sides, the localization process may have mistaken these two wall features. In addition, my ToF sensors
+                                  are not extremely reliable and sometimes returned faulty values or sensed objects that weren't there which made it hard
+                                  to accurately localize. 
                               </p>
+                              <p> In summary, my robot's ability to localize is inconsistent and unreliable. Even for the poses that yielded more or less
+                                  successful localization results, I had to run many trials in order to achieve sufficiently valid data. I discussed this problem
+                                  with the TAs in the lab and learned that it is not uncommon for ToF sensors to make unreliable measurements, especially at
+                                  longer distances. I had the same problem in the stunt lab where my robot would often detect a wall without there being one
+                                  in front of the robot, and it would prematurely stop and attempt the stunt when it was actually very far from the wall. This issue seemed
+                                  to happen again in this lab, and since there are only 18 data points used in the localization process, even one faulty data point
+                                  can cause the prediction to be erraneous. This is in contrast to the mapping lab, where I was able to achieve very accurate results
+                                  with my ToF sensor despite its occasional flawed data readings due to the sheer volume of data I was collecting. In conclusion, 
+                                  due to difficulty with my ToF sensors and getting accurate sensor readings, my robot was unable to consistently localize correctly. Therefore,
+                                  I do not plan to use localization in Lab 12, as I am afraid it will not yield consistent and accurate results. 
                         </a>    
                         </div>    
                         <br>
