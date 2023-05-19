@@ -37,23 +37,33 @@
                     <div class="col-lg-8 text-center">
                         <h2> Lab 12: Path Planning and Execution </h2>
                         <hr class="divider divider-light" />
-                        <p> In this lab, I will bring the simulation from Lab 10 to life by performing
-                        grid localization using Bayes filter on data from my real robot. I will place the robot at different points around the map
-                        and see how well it can localize its location using odometry and time of flight sensor data. </p>
+                        <p> In our final lab, my robot will navigate through a predetermined maze, and it must make a stop at all of the specified waypoints.
+                            The layout of the map is as shown below, with the small green dots representing the waypoints. 
+                        </p>
+                        <img src="assets/img/maze.png" alt="Maze" width=90% height=auto/>
                         
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Test New Localization Simulation</h5>
+                              <h5 class="mb-1">Implementation Discussion</h5>
                             </div>
-                            <p class="mb-1">In Lab 10, we wrote the localization code by ourself to learn the processes, filters, and models used
-                            to localize a mobile robot. In the current lab, we are provided with an optimized implementation which we will modify
-                            to drive our physical robot. The optimized code utilizes precaching, vector processing, and other programming practices
-                            which significantly speed up the calculation time. To test this code out, I ran the simulation once again and made sure
-                            it yielded the expected results. Below is the output of the simulation, where The green line shows the robot's actual ground 
-                            truth position, the red line is estimation based on odometry/sensor values, and the blue line is the Bayes filter estimation of the position. 
+                            <p class="mb-1">Unfortunately, I was unable to achieve accurate and reliable localization results using my ToF sensor data and the provided 
+                                localization program, which I documented in my Lab 11 writeup. Even though my polar plot of the ToF sensor readings looked like the robot's
+                                surroundings, the localization algorithm would predict the wrong location the majority of the time. If I had more time, I would continue
+                                to debug my localization since it is the most reliable way to complete Lab 12; however, I had to leave campus early, so I will not be using
+                                localization in my map navigation, as it will likely provide innacurate results. 
                             </p>    
-                              <img src="assets/img/simulation_lab11.png" alt="Simulation" width=90% height=auto/>
+                            <p class="mb-1">
+                                Instead, I will still try to be as accurate as possible with my navigation by using feedback control to detect the robot's current state
+                                and determine its next move. My approach divides the map traversal into two parts: straight-line forward pathing and counterclockwise
+                                rotation. At every waypoint, the robot rotates to a set angle using closed-loop feedback control. The decision to continue rotating or
+                                stop depends on the input yaw value received from the robot's IMU. This method works well because the IMU performs very rapid data collection,
+                                so the angle that the robot turns to is relatively precise and consistent. To travel from waypoint to waypoint, the robot is programmed
+                                to move forward a certain distance by driving the motors for a predetermined period of time. This open-loop method for straight-line movement
+                                is used because my robot's ToF sensors sometimes mistakenly detect things that are not there, causing it to output inaccurate measurements that
+                                are much lower than they should be. Since the navigation task is quite long, I would need the ToF sensors to consistently output accurate 
+                                readings, so I decided to forego this method. In the end, I found that this combination of turning and moving forward worked sufficiently well
+                                for my robot to navigate the map. 
                         </a>
                     </div>
                         <br>
@@ -62,59 +72,39 @@
                             <div class="d-flex w-100 justify-content-between">
                               <h5 class="mb-1">Code Implementation</h5>
                             </div>
-                              <p class="mb-1">Before we can run the simulation code on the real robot, we have to implement the <code> perform_observation_loop() </code> 
-                                  function of class RealRobot in lab11_real.ipynb. This code allows the robot to rotate at a uniform angular speed of 15 degrees
-                                  per second and collect 18 evenly spaced time of flight sensor readings each 20 degrees apart. This array of 18 data points 
-                                  is then passed into the optimized localization program to provide the final estimation of the robot's location. Here is the code
-                                  I used to implement this functionality:
+                              <p class="mb-1">I implemented my navigation algorithm using code that resembles a state machine, where the robot can either be in a "move
+                                  forward" state or a "rotate" state. I defined a function, <code>angle_turn()</code>, which uses yaw feedback to turn the car a specified
+                                  number of degrees. It calculates the difference between the current yaw and begin_angle, which is the yaw at which the robot began rotation,
+                                  and stops when the desired number of degrees has been reached. There are a total of 13 states, one for each movement the robot takes
+                                  to traverse the map. After each movement is completed, the state_change_flag is raised; this flag is handled at the end of the code, where
+                                  the begin_angle variable is updated to the current yaw, the state variable is incremented to move on to the next state, and the state_change_flag
+                                  is reset to 0. All of this code is nested within the <code>while (central.connected())</code> block, so it begins execution when the robot
+                                  connects to my laptop over Bluetooth and continues to run in a loop until disconnected. 
                             </p>   
-                               <script src="https://gist.github.com/tiffanyguo8/e48696610f5718a8a0268bb5567e2ebe.js"></script>
+                               <script src="https://gist.github.com/tiffanyguo8/a497585b8394336b601fd85b999218a3.js"></script>
                         </a>    
                         </div>       
                             <br>
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Odometry Motion Model</h5>
+                              <h5 class="mb-1">Results</h5>
                             </div>
-                            <p class="mb-1">The <code> odom_motion_model() </code> function calculates the state transition probability, which is the likelihood
-                                that the robot is in the curr_pose given the prev_pose and control input u. The equation for transition probability is given below as
-                                the product of three gaussians, each of which takes mu, x, and sigma values and outputs the relative likelihood of x being in a Normal Distribution 
-                                with mean mu and standard deviation sigma.
-                            </p>
-                              <img src="assets/img/odometry_motion_model.png" alt="Odometry Motion Model" width=70% height=auto/>
-                              <script src="https://gist.github.com/tiffanyguo8/264d2fe72a352cf3e48a0da10544fd8c.js"></script>
-                        </a>    
-                        </div>    
-                            <br>
-                        <div class="list-group">
-                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                            <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Prediction Step</h5>
-                            </div>
-                            <p class="mb-1">This step updates the bel_bar probability based on the cur_odom and prev_odom inputs. First, the control
-                                input is updated by calling compute_control(). Next, I loop through the previous and current states and call 
-                                odom_motion_model() to calculate the probability of being in each state. I then multiplied the probability of each state
-                                by the previous belief at that state and normalized the distribution so sum to 1. If the previous belief for any state
-                                is under a threshold of 0.0001, the calculations for that state are negligable and thus skipped to increase efficiency. 
-                            </p>    
-                              <script src="https://gist.github.com/tiffanyguo8/0528605d476824c42f5ac619d5d68eaa.js"></script>
-                        </a>    
-                        </div> 
-                            <br>
-                        <div class="list-group">
-                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                            <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Sensor Model</h5>
-                            </div>
-                              <p class="mb-1">The <code> sensor_model() </code> function calculates the probability of obtaining certain sensor readings given the state of the robot. 
-                                It does this by calculating a Gaussian using the true observation (since this is a simulation, we know what the robot should sense) as
-                                the mean and sensor_sigma as the standard deviation. The function returns an array of the calculated results for the measurement,
-                                which consists of 18 data points. 
+                              <p class="mb-1">Here is a video of my robot navigating through the maze and successfully hitting all of the waypoint squares. Throughout the testing
+                                  process, I observed that the performance of the robot varied drastically depending on the voltage of the battery supplying power to the motors,
+                                  and this caused more inconsistency than I had anticipated. The rotation of the robot at each waypoint was not affected much because it was close-loop,
+                                  but the forward movements often fell short or overshot the desired distance. Since the entire navigation sequence is 13 states long, it took a while
+                                  to tune each movement to be accurate, and even in the successful run video, the robot is not perfectly centered at every waypoint. However, I tried
+                                  my best within the limited time that I had, and I hope the result is sufficient to show that my robot is able to perform navigation using my semi-closed-loop
+                                  algorithm. 
                             </p>    
                               <iframe width="560" height="315" src="https://www.youtube.com/embed/hv26OLieigw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </a>    
+                            </a>    
                         </div> 
+                        <br>
+                        <p> Thank you to all the TAs for making this class as intriguing and fun as it was rigorous. I was able to explore a variety of topics in robotics,
+                            and I am excited to continue following my passion for robotics into the future. I am especially thankful for my Wednesday lab TAs, Anya and Jonathan,
+                            who patiently explained confusing concepts to me, were very willing to spend time to help me debug my robot, and were overall the most supportive and kind TAs I have had <3
                         <br>
                         <div class="d-grid gap-2">
                            <a class="btn btn-lg btn-primary" href="index.html">Home</a>
