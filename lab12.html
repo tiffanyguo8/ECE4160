@@ -112,33 +112,7 @@
                                 the mean and sensor_sigma as the standard deviation. The function returns an array of the calculated results for the measurement,
                                 which consists of 18 data points. 
                             </p>    
-                              <script src="https://gist.github.com/tiffanyguo8/8fe2b7109eee03bc5b7cbc42ab6be5da.js"></script>
-                        </a>    
-                        </div> 
-                            <br>
-                        <div class="list-group">
-                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                            <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Update Step</h5>
-                            </div>
-                            <p class="mb-1">In the update step, the belief that the robot is in each state is calculated given all past measurements
-                                and control inputs. I iterate through each potential current position and multiply each state's belief by the probability
-                                of obtaining the current sensor readings given the said position. The belief value for each pose is updated accordingly 
-                                and normalized so that the total probability is 1. 
-                            </p>  
-                              <script src="https://gist.github.com/tiffanyguo8/30dca0ccbc9310513cf4ae77323d6844.js"></script>
-                        </a>    
-                        </div> 
-                            <br>
-                        <div class="list-group">
-                          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                            <div class="d-flex w-100 justify-content-between">
-                              <h5 class="mb-1">Simulation</h5>
-                            </div>
-                            <p class="mb-1">Here are the simulations of the robot's localization while moving in a predetermined trajectory
-                                and the corresponding output. The green line shows the robot's actual ground truth position, the red line is 
-                                estimation based on odometry/sensor values, and the blue line is the Bayes filter estimation of the position.  
-                            </p>  
+                              <iframe width="560" height="315" src="https://www.youtube.com/embed/hv26OLieigw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </a>    
                         </div> 
                          <iframe width="560" height="315" src="https://www.youtube.com/embed/fG0snO9WOvQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
