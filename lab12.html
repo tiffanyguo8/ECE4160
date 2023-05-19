@@ -41,7 +41,7 @@
                             The layout of the map is as shown below, with the small green dots representing the waypoints. 
                         </p>
                         <img src="assets/img/maze.png" alt="Maze" width=90% height=auto/>
-                        
+                        <br>
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
@@ -74,10 +74,10 @@
                             </div>
                               <p class="mb-1">I implemented my navigation algorithm using code that resembles a state machine, where the robot can either be in a "move
                                   forward" state or a "rotate" state. I defined a function, <code>angle_turn()</code>, which uses yaw feedback to turn the car a specified
-                                  number of degrees. It calculates the difference between the current yaw and begin_angle, which is the yaw at which the robot began rotation,
+                                  number of degrees. It calculates the difference between the current yaw and <code>begin_angle</code>, which is the yaw at which the robot began rotation,
                                   and stops when the desired number of degrees has been reached. There are a total of 13 states, one for each movement the robot takes
-                                  to traverse the map. After each movement is completed, the state_change_flag is raised; this flag is handled at the end of the code, where
-                                  the begin_angle variable is updated to the current yaw, the state variable is incremented to move on to the next state, and the state_change_flag
+                                  to traverse the map. After each movement is completed, the <code>state_change_flag</code> is raised; this flag is handled at the end of the code, where
+                                  the <code>begin_angle</code> variable is updated to the current yaw, the state variable is incremented to move on to the next state, and the <code>state_change_flag</code>
                                   is reset to 0. All of this code is nested within the <code>while (central.connected())</code> block, so it begins execution when the robot
                                   connects to my laptop over Bluetooth and continues to run in a loop until disconnected. 
                             </p>   
@@ -93,8 +93,8 @@
                               <p class="mb-1">Here is a video of my robot navigating through the maze and successfully hitting all of the waypoint squares. Throughout the testing
                                   process, I observed that the performance of the robot varied drastically depending on the voltage of the battery supplying power to the motors,
                                   and this caused more inconsistency than I had anticipated. The rotation of the robot at each waypoint was not affected much because it was close-loop,
-                                  but the forward movements often fell short or overshot the desired distance. Since the entire navigation sequence is 13 states long, it took a while
-                                  to tune each movement to be accurate, and even in the successful run video, the robot is not perfectly centered at every waypoint. However, I tried
+                                  but the forward movements often fell short or overshot the desired distance. Since the entire navigation sequence is 13 states long, and the success of hitting each state depended on the accuracy of the state before it, it took a while
+                                  to tune each movement to be accurate; even in the successful run video, the robot is not perfectly centered at every waypoint. However, I tried
                                   my best within the limited time that I had, and I hope the result is sufficient to show that my robot is able to perform navigation using my semi-closed-loop
                                   algorithm. 
                             </p>    
